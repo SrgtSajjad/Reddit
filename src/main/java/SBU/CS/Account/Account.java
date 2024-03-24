@@ -11,6 +11,7 @@ public class Account implements AccountManagement {
     private String firstName;
     private String lastName;
     private Birthday birthday;
+    private int age;
 
     public Account(String username, String password, String firstName, String lastName, Birthday birthday) {
         this.username = username;
@@ -18,6 +19,7 @@ public class Account implements AccountManagement {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        age = 2024 - birthday.year;
         accountID = UUID.randomUUID();
     }
 
@@ -38,5 +40,28 @@ public class Account implements AccountManagement {
         this.password = newPassword;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public UUID getAccountID() {
+        return accountID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
+    public int getAge() {
+        return age;
+    }
 }
 
