@@ -7,11 +7,11 @@ import java.util.UUID;
 public class Account implements AccountManagement {
     private String username;
     private String password;
-    private UUID accountID;
-    private String firstName;
-    private String lastName;
-    private Birthday birthday;
-    private int age;
+    private final UUID accountID;
+    private final String firstName;
+    private final String lastName;
+    private final Birthday birthday;
+    private final int age;
 
     public Account(String username, String password, String firstName, String lastName, Birthday birthday) {
         this.username = username;
@@ -25,9 +25,7 @@ public class Account implements AccountManagement {
 
     @Override
     public boolean validatePassword(String enteredPassword) {
-        if (Objects.equals(this.password, DigestUtils.sha256Hex(enteredPassword)))
-            return true;
-        return false;
+        return Objects.equals(this.password, DigestUtils.sha256Hex(enteredPassword));
     }
 
     @Override
