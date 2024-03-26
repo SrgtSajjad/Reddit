@@ -1,5 +1,10 @@
 package SBU.CS.Account;
 
+import SBU.CS.Tools;
+
+import javax.tools.Tool;
+import java.util.Scanner;
+
 public class Birthday {
     int year;
     int month;
@@ -11,7 +16,7 @@ public class Birthday {
         this.day = day;
     }
 
-    public boolean validateBirthday() {
+    public static boolean validateBirthday(int year, int month, int day) {
         boolean isLeapYear = year % 4 == 0;
         if (day <= 0)
             return false;
@@ -36,5 +41,20 @@ public class Birthday {
         }
 
         return true;
+    }
+
+    public static void getBirthday() {
+        int year, month, day;
+        Scanner scanner = new Scanner(System.in);
+
+        year = Tools.handleErrors("a year", 1900, 2024);
+        if (2024 - year < 18) {
+            System.out.println("-You are too young to sign up, please ask for your parents guidance-");
+            return;
+        }
+
+        month = Tools.handleErrors("a month", 1, 12);
+        day = Tools.handleErrors("a day", 1, 31);
+
     }
 }
