@@ -12,14 +12,14 @@ public class Tools {
         }
     }
 
-    public static int handleErrors(int firstValue, int lastValue) { // for handling exceptions in getting input
+    public static int handleErrors(String inputTitle, int firstValue, int lastValue) { // for handling exceptions in getting input
         Scanner scanner = new Scanner(System.in);
 
         int number = 0;
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.printf("Enter an option (from %d to %d)", firstValue, lastValue);
+            System.out.printf("Enter %s (from %d to %d)", inputTitle, firstValue, lastValue);
             String input = scanner.nextLine();
 
             try {
@@ -28,11 +28,11 @@ public class Tools {
                 if (number >= firstValue && number <= lastValue) {
                     validInput = true;
                 } else {
-                    System.out.printf("Enter an option (from %d to %d)\n", firstValue, lastValue);
+                    System.out.printf("Enter %s (from %d to %d)\n", inputTitle, firstValue, lastValue);
                 }
             } catch (NumberFormatException e) {
                 // Handle the case where input is not a valid integer
-                System.out.println("Invalid input: Please enter a valid integer.");
+                System.out.println("Invalid input: Please enter a valid number.");
             }
         }
         // Close the scanner
