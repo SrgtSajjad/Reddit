@@ -8,10 +8,10 @@ public class Account implements AccountManagement {
     private String username;
     private String password;
     private final UUID accountID;
-    private final String firstName;
-    private final String lastName;
-    private final Birthday birthday;
-    private final int age;
+    private String firstName;
+    private String lastName;
+    private Birthday birthday;
+    private int age;
 
     public Account(String username, String password, String firstName, String lastName, Birthday birthday) {
         this.username = username;
