@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="clean up code">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Subreddit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="Created Post.java and  Subreddit.java classes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Subreddit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +141,31 @@
       <option name="project" value="LOCAL" />
       <updated>1711290409000</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="created Tools.java for general terminal uses">
+      <option name="closed" value="true" />
+      <created>1711362293589</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711362293589</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Main refactored">
+      <option name="closed" value="true" />
+      <created>1711362316152</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711362316152</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Created Post.java and  Subreddit.java classes">
+      <option name="closed" value="true" />
+      <created>1711362546628</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711362546628</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,7 +191,10 @@
     <MESSAGE value="create getters" />
     <MESSAGE value="create static methods clearScreen and handleErrors" />
     <MESSAGE value="clean up code" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up code" />
+    <MESSAGE value="created Tools.java for general terminal uses" />
+    <MESSAGE value="Main refactored" />
+    <MESSAGE value="Created Post.java and  Subreddit.java classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Post.java and  Subreddit.java classes" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -175,6 +204,10 @@
     },
     {
       "branch": "master",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
       "currentBranchFilter": true
     },
     {
