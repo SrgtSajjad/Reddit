@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="Created Post.java and  Subreddit.java classes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Subreddit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" afterDir="false" />
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="cleared Main.java">
+      <change afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddiit/Post.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +160,71 @@
       <option name="project" value="LOCAL" />
       <updated>1711362546628</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Created C.java">
+      <option name="closed" value="true" />
+      <created>1711484674141</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711484674141</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Created Comment.java">
+      <option name="closed" value="true" />
+      <created>1711484683729</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711484683729</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Created User.java">
+      <option name="closed" value="true" />
+      <created>1711484693702</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1711484693702</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add Subreddit field attributes">
+      <option name="closed" value="true" />
+      <created>1711484721037</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711484721037</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update Account attributes">
+      <option name="closed" value="true" />
+      <created>1711484755519</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1711484755519</updated>
+    </task>
+    <task id="LOCAL-00014" summary="updated Tools.handleErrors">
+      <option name="closed" value="true" />
+      <created>1711485091532</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1711485091532</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated Birthday.getBirthday">
+      <option name="closed" value="true" />
+      <created>1711485127094</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1711485127094</updated>
+    </task>
+    <task id="LOCAL-00016" summary="cleared Main.java">
+      <option name="closed" value="true" />
+      <created>1711485162786</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1711485162786</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -194,7 +253,15 @@
     <MESSAGE value="created Tools.java for general terminal uses" />
     <MESSAGE value="Main refactored" />
     <MESSAGE value="Created Post.java and  Subreddit.java classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Post.java and  Subreddit.java classes" />
+    <MESSAGE value="Created Database.java" />
+    <MESSAGE value="Created Comment.java" />
+    <MESSAGE value="Created User.java" />
+    <MESSAGE value="Add Subreddit field attributes" />
+    <MESSAGE value="update Account attributes" />
+    <MESSAGE value="updated Tools.handleErrors" />
+    <MESSAGE value="updated Birthday.getBirthday" />
+    <MESSAGE value="cleared Main.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleared Main.java" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -204,6 +271,10 @@
     },
     {
       "branch": "master",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
       "currentBranchFilter": true
     },
     {
