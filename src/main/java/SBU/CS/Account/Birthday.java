@@ -17,7 +17,7 @@ public class Birthday {
         this.day = day;
     }
 
-    public static boolean validateBirthday(int year, int month, int day) {
+    public static boolean validateBirthday(int year, int month, int day) { // checks if  a date is available
         boolean isLeapYear = year % 4 == 0;
         if (day <= 0)
             return false;
@@ -44,7 +44,7 @@ public class Birthday {
         return true;
     }
 
-    public static ArrayList<Integer> getBirthday() {
+    public static ArrayList<Integer> getBirthday() { // gets birthday from user
         int year, month, day;
         Scanner scanner = new Scanner(System.in);
         ArrayList<Integer> birthDate = new ArrayList<>();

@@ -1,6 +1,8 @@
 package SBU.CS.Account;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.DigestUtils; // for hashing passwords
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,15 +13,12 @@ public class Account implements AccountManagement {
     private String firstName;
     private String lastName;
     private Birthday birthday;
-    private int age;
-
     public Account(String username, String password, String firstName, String lastName, Birthday birthday) {
         this.username = username;
         this.password = DigestUtils.sha256Hex(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        age = 2024 - birthday.year;
         accountID = UUID.randomUUID();
     }
 
@@ -35,7 +34,7 @@ public class Account implements AccountManagement {
 
     @Override
     public void changePassword(String newPassword) {
-        this.password = newPassword;
+        this.password = DigestUtils.sha256Hex(newPassword);
     }
 
     public String getUsername() {
@@ -59,7 +58,7 @@ public class Account implements AccountManagement {
     }
 
     public int getAge() {
-        return age;
+        return LocalDateTime.now().getYear() - birthday.year;
     }
 }
 

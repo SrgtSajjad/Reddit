@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Tools {
 
-    public static void clearScreen() {
+    public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
@@ -31,17 +31,15 @@ public class Tools {
                     System.out.printf("Enter %s (from %d to %d)\n", inputTitle, firstValue, lastValue);
                 }
             } catch (NumberFormatException e) {
-                // Handle the case where input is not a valid integer
+                // Handle the case where input is not a valid number
                 System.out.println("Invalid input: Please enter a valid number.");
             }
         }
-        // Close the scanner
-        scanner.close();
 
         return number;
     }
 
-    public static boolean validateEmailFormat(String email) {
+    public static boolean validateEmailFormat(String email) { // validates an entered email's  format using regex
         String regex = ".+@.+\\..+";
 
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);

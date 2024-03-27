@@ -9,13 +9,14 @@ public class Subreddit {
     String title;
     User creator;
     ArrayList<User> admins = new ArrayList<>();
-    ArrayList<String> flairTags = new ArrayList<>();
     ArrayList<Post> posts = new ArrayList<>();
+    ArrayList<User> members = new ArrayList<>();
 
     public Subreddit(String title, User creator) {
         this.title = title;
         this.creator = creator;
-        admins.add(creator);
-        Database.subreddits.add(this);
+        admins.add(creator); // automatically add the creator to the subreddit's admin list
+        Database.subreddits.add(this); // add the created subreddit to the database
+        members.add(creator);
     }
 }
