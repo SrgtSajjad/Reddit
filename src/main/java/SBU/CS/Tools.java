@@ -1,5 +1,6 @@
 package SBU.CS;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +20,7 @@ public class Tools {
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.printf("Enter %s (from %d to %d)", inputTitle, firstValue, lastValue);
+            System.out.printf("Enter %s (from %d to %d): ", inputTitle, firstValue, lastValue);
             String input = scanner.nextLine();
 
             try {
@@ -28,7 +29,7 @@ public class Tools {
                 if (number >= firstValue && number <= lastValue) {
                     validInput = true;
                 } else {
-                    System.out.printf("Enter %s (from %d to %d)\n", inputTitle, firstValue, lastValue);
+                    System.out.println("Invalid input: Please enter a valid number");
                 }
             } catch (NumberFormatException e) {
                 // Handle the case where input is not a valid number
@@ -46,5 +47,26 @@ public class Tools {
         Matcher matcher = pattern.matcher(email);
 
         return matcher.find();
+    }
+
+    public static String calculateTimePassed(LocalDateTime timePublished) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        String timePassed;
+
+        if (currentTime.getYear() - timePublished.getYear() > 0) {
+            timePassed = currentTime.getYear() - timePublished.getYear() + " y";
+        } else if (currentTime.getMonthValue() - timePublished.getMonthValue() > 0) {
+            timePassed = currentTime.getMonthValue() - timePublished.getMonthValue() + " mo";
+        } else if (currentTime.getDayOfMonth() - timePublished.getDayOfMonth() > 0) {
+            timePassed = currentTime.getDayOfMonth() - timePublished.getDayOfMonth() + " d";
+        } else if (currentTime.getHour() - timePublished.getHour() > 0) {
+            timePassed = currentTime.getHour() - timePublished.getHour() + " h";
+        } else if (currentTime.getMinute() - timePublished.getMinute() > 0) {
+            timePassed = currentTime.getMinute() - timePublished.getMinute() + " min";
+        } else {
+            timePassed = "A few moments";
+        }
+
+        return timePassed;
     }
 }
