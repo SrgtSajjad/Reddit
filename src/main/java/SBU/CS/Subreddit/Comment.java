@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Comment {
     private Comment mainCommentOrPost;
-    String text;
-    User publisher;
-    LocalDateTime timePublished;
+    private String text;
+    private User publisher;
+    private LocalDateTime timePublished;
     ArrayList<Comment> comments = new ArrayList<>();
     ArrayList<User> upVoters = new ArrayList<>();
     ArrayList<User> downVoters = new ArrayList<>();
@@ -99,4 +99,23 @@ public class Comment {
         }
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Comment getMainCommentOrPost() {
+        return mainCommentOrPost;
+    }
+
+    public User getPublisher() {
+        return publisher;
+    }
+
+    public LocalDateTime getTimePublished() {
+        return timePublished;
+    }
 }

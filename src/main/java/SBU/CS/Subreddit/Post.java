@@ -3,20 +3,18 @@ package SBU.CS.Subreddit;
 import SBU.CS.Account.User;
 import SBU.CS.Tools;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Post extends Comment {
 
-    String title;
-    Subreddit subreddit;
-    ArrayList<String> flairTags = new ArrayList<>();
+    private String title;
+    private Subreddit subreddit;
+    private ArrayList<String> flairTags = new ArrayList<>();
 
     public Post(String title, String text, Subreddit subreddit, User publisher, ArrayList<String> flairTags) {
         super(text, publisher);
         this.title = title;
-        this.text = text;
         this.subreddit = subreddit;
         this.flairTags = flairTags;
         subreddit.posts.addFirst(this); // adds the created post to a subreddit's  post list
@@ -24,9 +22,9 @@ public class Post extends Comment {
 
     @Override
     public void displayBrief() { // for displaying a short version of the post
-        System.out.println("r/" + subreddit.title + " - " + Tools.calculateTimePassed (timePublished));
+        System.out.println("r/" + subreddit.title + " - " + Tools.calculateTimePassed (getTimePublished()));
         System.out.println("### " + this.title);
-        System.out.println("## " + this.text);
+        System.out.println("## " + this.getText());
 
         for (String tag: flairTags) {
             System.out.print("#" + tag + " ");
@@ -36,10 +34,10 @@ public class Post extends Comment {
 
     @Override
     public void displayComplete(User user) {
-        System.out.println("r/" + publisher.getUsername());
-        System.out.printf("u/%s - %d/%d/%d at %d:%d\n",publisher.getUsername(), timePublished.getYear(), timePublished.getMonthValue(), timePublished.getDayOfMonth(), timePublished.getHour(), timePublished.getMinute());
+        System.out.println("r/" + getPublisher().getUsername());
+        System.out.printf("u/%s - %d/%d/%d at %d:%d\n",getPublisher().getUsername(), getTimePublished().getYear(), getTimePublished().getMonthValue(), getTimePublished().getDayOfMonth(), getTimePublished().getHour(), getTimePublished().getMinute());
         System.out.println("### " + this.title);
-        System.out.println("## " + this.text);
+        System.out.println("## " + this.getText());
         System.out.println("Karma: " + getKarma());
 
         Scanner scanner = new Scanner(System.in);
@@ -97,5 +95,25 @@ public class Post extends Comment {
         }
     }
 
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Subreddit getSubreddit() {
+        return subreddit;
+    }
+
+    public void setSubreddit(Subreddit subreddit) {
+        this.subreddit = subreddit;
+    }
+
+    public ArrayList<String> getFlairTags() {
+        return flairTags;
+    }
 
 }
