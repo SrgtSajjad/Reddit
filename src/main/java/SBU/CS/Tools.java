@@ -33,7 +33,7 @@ public class Tools {
                 }
             } catch (NumberFormatException e) {
                 // Handle the case where input is not a valid number
-                System.out.println("Invalid input: Please enter a valid number.");
+                System.out.println("Invalid input: Please enter a valid integer.");
             }
         }
 
