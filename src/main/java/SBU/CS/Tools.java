@@ -7,6 +7,17 @@ import java.util.regex.Pattern;
 
 public class Tools {
 
+    public static final String RESET_COLOR = "\u001B[0m";
+    public static final String BLACK_COLOR = "\u001B[30m";
+    public static final String RED_COLOR = "\u001B[31m";
+    public static final String GREEN_COLOR = "\u001B[32m";
+    public static final String YELLOW_COLOR = "\u001B[33m";
+    public static final String BLUE_COLOR = "\u001B[34m";
+    public static final String PURPLE_COLOR = "\u001B[35m";
+    public static final String CYAN_COLOR = "\u001B[36m";
+    public static final String WHITE_COLOR = "\u001B[37m";
+
+
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
         for (int i = 0; i < 50; i++) {
             System.out.println();
