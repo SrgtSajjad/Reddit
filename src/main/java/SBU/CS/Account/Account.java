@@ -13,12 +13,14 @@ public class Account implements AccountManagement {
     private String firstName;
     private String lastName;
     private Birthday birthday;
+    private LocalDateTime timeCreated;
     public Account(String username, String password, String firstName, String lastName, Birthday birthday) {
         this.username = username;
         this.password = DigestUtils.sha256Hex(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        timeCreated = LocalDateTime.now();
         accountID = UUID.randomUUID();
     }
 
@@ -71,6 +73,10 @@ public class Account implements AccountManagement {
 
     public int getAge() {
         return LocalDateTime.now().getYear() - birthday.year;
+    }
+
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
     }
 }
 
