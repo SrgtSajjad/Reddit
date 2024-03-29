@@ -44,24 +44,15 @@ public class Birthday {
         return true;
     }
 
-    public static ArrayList<Integer> getBirthday() { // gets birthday from user
+    public static Birthday getBirthday() { // gets birthday from user
         int year, month, day;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Integer> birthDate = new ArrayList<>();
 
         year = Tools.handleErrors("a year", 1900, 2024);
-        if (2024 - year < 18) {
-            System.out.println("-You are too young to sign up, please ask for your parents guidance-");
-            return null;
-        }
-
         month = Tools.handleErrors("a month", 1, 12);
         day = Tools.handleErrors("a day", 1, 31);
 
-        birthDate.set(0, year);
-        birthDate.set(1, month);
-        birthDate.set(2, day);
 
-        return birthDate;
+        return new Birthday(year, month, day);
     }
 }

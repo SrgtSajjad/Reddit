@@ -68,8 +68,16 @@ public class Account implements AccountManagement {
     }
 
     public void changeBirthday(Birthday newBirthday) {
-        this.birthday = newBirthday;
+        if (Birthday.validateBirthday(newBirthday.year, newBirthday.month, newBirthday.day)) {
+            this.birthday = newBirthday;
+            System.out.println("Birthday changed successfully");
+        }
+        else
+            System.out.println("Entered date is not available, please try again");
+
     }
+
+
 
     public int getAge() {
         return LocalDateTime.now().getYear() - birthday.year;

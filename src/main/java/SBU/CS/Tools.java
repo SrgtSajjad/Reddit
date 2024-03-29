@@ -17,6 +17,14 @@ public class Tools {
     public static final String CYAN_COLOR = "\u001B[36m";
     public static final String WHITE_COLOR = "\u001B[37m";
 
+    public static boolean verifyChanges(String enteredString) {
+        if (enteredString.contains(" ")) {
+            System.out.print("Invalid input: Entered string contains spaces, please try again");
+            return false;
+
+        }
+        return true;
+    }
 
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
         for (int i = 0; i < 50; i++) {
