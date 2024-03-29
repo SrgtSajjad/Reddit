@@ -85,8 +85,12 @@ public class Post extends Comment {
                     }
                     break;
                 case 3: // add a comment to the post
-                    System.out.println("Enter your comment:");
-                    comments.add(new Comment(scanner.nextLine(), user, getSubreddit(), this));
+                    if (getSubreddit().bannedUsers.contains(user)) {
+                        System.out.println("You have been banned from this subreddit and you can't post or comment in it");
+                    } else {
+                        System.out.println("Enter your comment:");
+                        comments.add(new Comment(scanner.nextLine(), user, getSubreddit(), this));
+                    }
                     break;
                 case 4: // view other comments
                     System.out.println("\n0. Exit");
