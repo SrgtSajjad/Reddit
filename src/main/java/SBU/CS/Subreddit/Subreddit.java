@@ -11,6 +11,7 @@ public class Subreddit {
     ArrayList<User> admins = new ArrayList<>();
     ArrayList<Post> posts = new ArrayList<>();
     ArrayList<User> members = new ArrayList<>();
+    ArrayList<User> bannedUsers = new ArrayList<>();
 
     public Subreddit(String title, User creator) {
         this.title = title;
