@@ -1,6 +1,7 @@
 package SBU.CS.Subreddit;
 
 import SBU.CS.Account.User;
+import SBU.CS.Notification;
 import SBU.CS.Tools;
 
 import java.util.ArrayList;
@@ -13,9 +14,11 @@ public class Post extends Comment {
 
     private String title;
     private ArrayList<String> flairTags = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
+
 
     public Post(String title, String text, Subreddit subreddit, User publisher, ArrayList<String> flairTags) {
-        super(text, publisher, subreddit);
+        super(text, publisher, subreddit, null);
         this.title = title;
         this.flairTags = flairTags;
         subreddit.posts.addFirst(this); // adds the created post to a subreddit's  post list
@@ -57,7 +60,7 @@ public class Post extends Comment {
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, 6);
+            command = Tools.handleErrors("an option", 0, (getSubreddit().admins.contains(user) ? 6 : (user == getPublisher() ? 5 : 4)));
             switch (command) {
                 case 0: // exit
                     return;
@@ -83,7 +86,7 @@ public class Post extends Comment {
                     break;
                 case 3: // add a comment to the post
                     System.out.println("Enter your comment:");
-                    comments.add(new Comment(scanner.nextLine(), user, getSubreddit()));
+                    comments.add(new Comment(scanner.nextLine(), user, getSubreddit(), this));
                     break;
                 case 4: // view other comments
                     System.out.println("\n0. Exit");
@@ -108,7 +111,9 @@ public class Post extends Comment {
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
                 case 6:
-                    if (getSubreddit().admins.contains(user))
+                    if (getSubreddit().admins.contains(getPublisher()) && getSubreddit().creator != user) {
+                        System.out.println("Publisher of this post is an admin, admin actions is not available for this post");
+                    } else if (getSubreddit().admins.contains(user) || getSubreddit().creator == user)
                         adminActions();
                     else
                         System.out.println("Invalid input: Please enter a valid number");
@@ -119,12 +124,41 @@ public class Post extends Comment {
     }
 
     @Override
-    public void adminActions() {
-        // TODO
+    public void adminActions() throws InterruptedException {
+        int command;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Admin Actions: \n0. Cancel\n1. Delete Post\n2. Ban publisher from subreddit");
+        command = Tools.handleErrors("an option", 0, 3);
+        switch (command) {
+            case 0:
+                break;
+            case 1:
+                System.out.printf("Confirm delete of the post: \"%s\"\n1. No\n2. Yes\n", title);
+                command = Tools.handleErrors("an option", 1, 2);
+                if (command == 2) {
+                    getSubreddit().posts.remove(this);
+                    getPublisher().getNotifications().add(new Notification("Post Deletion", "Your post in the subreddit: " + getSubreddit().title + " with title: " + title + ", was deleted by an admin"));
+                    System.out.println("Post deleted successfully");
+                }
+                break;
+            case 2:
+                System.out.printf("Confirm ban of the publisher: \"%s\"\n1. No\n2. Yes\n", getPublisher().getUsername());
+                command = Tools.handleErrors("an option", 1, 2);
+                if (command == 2) {
+                    getSubreddit().bannedUsers.add(getPublisher());
+                    getSubreddit().admins.remove(getPublisher());
+                    getSubreddit().posts.remove(this);
+                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your post in the subreddit: " + getSubreddit().title + " with title: " + title + ", you have been banned from this subreddit"));
+                    System.out.println("User banned and post deleted successfully");
+                }
+                break;
+        }
+        sleep(200);
+
     }
 
     @Override
-    public void edit() {
+    public void edit() throws InterruptedException {
         boolean flag = true;
         int command;
         Scanner scanner = new Scanner(System.in);
@@ -148,6 +182,7 @@ public class Post extends Comment {
                     System.out.println("Tags edited successfully");
                     break;
             }
+            sleep(200);
         }
     }
 
