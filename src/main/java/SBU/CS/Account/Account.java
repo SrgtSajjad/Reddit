@@ -49,12 +49,24 @@ public class Account implements AccountManagement {
         return firstName;
     }
 
+    public void changeFirstName(String newFirstName) {
+        this.firstName = newFirstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
+    public void changeLastName(String newLastName) {
+        this.lastName = newLastName;
+    }
+
     public Birthday getBirthday() {
         return birthday;
+    }
+
+    public void changeBirthday(Birthday newBirthday) {
+        this.birthday = newBirthday;
     }
 
     public int getAge() {
