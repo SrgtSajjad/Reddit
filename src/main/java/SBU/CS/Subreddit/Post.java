@@ -21,12 +21,12 @@ public class Post extends Comment {
         super(text, publisher, subreddit, null);
         this.title = title;
         this.flairTags = flairTags;
-        subreddit.posts.addFirst(this); // adds the created post to a subreddit's  post list
+        subreddit.getPosts().addFirst(this); // adds the created post to a subreddit's  post list
     }
 
     @Override
     public void displayBrief() { // for displaying a short version of the post
-        System.out.println("r/" + getSubreddit().title + " - " + Tools.calculateTimePassed(getTimePublished()));
+        System.out.println("r/" + getSubreddit().getTitle() + " - " + Tools.calculateTimePassed(getTimePublished()));
         System.out.println("### " + this.title);
 
         for (String tag : flairTags) {
@@ -58,13 +58,13 @@ public class Post extends Comment {
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().admins.contains(user) ? "\n6. Admin Actions" : ""));
+            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, (getSubreddit().admins.contains(user) ? 6 : (user == getPublisher() ? 5 : 4)));
+            command = Tools.handleErrors("an option", 0, (getSubreddit().getAdmins().contains(user) ? 6 : (user == getPublisher() ? 5 : 4)));
             switch (command) {
                 case 0: // exit
                     return;
@@ -89,7 +89,7 @@ public class Post extends Comment {
                     }
                     break;
                 case 3: // add a comment to the post
-                    if (getSubreddit().bannedUsers.contains(user)) {
+                    if (getSubreddit().getBannedUsers().contains(user)) {
                         System.out.println("You have been banned from this subreddit and you can't post or comment in it");
                     } else {
                         System.out.println("Enter your comment:");
@@ -118,11 +118,11 @@ public class Post extends Comment {
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
-                case 6:
-                    if (getSubreddit().admins.contains(getPublisher()) && getSubreddit().creator != user) {
+                case 6: // open admin actions if user is an admin
+                    if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
                         System.out.println("Publisher of this post is an admin, admin actions is not available for this post");
-                    } else if (getSubreddit().admins.contains(user) || getSubreddit().creator == user)
-                        adminActions();
+                    } else if (getSubreddit().getAdmins().contains(user))
+                        adminActions(user);
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
@@ -132,11 +132,11 @@ public class Post extends Comment {
     }
 
     @Override
-    public void adminActions() throws InterruptedException {
+    public void adminActions(User user) throws InterruptedException {
         int command;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Admin Actions: \n0. Cancel\n1. Delete Post\n2. Ban publisher from subreddit");
-        command = Tools.handleErrors("an option", 0, 3);
+        command = Tools.handleErrors("an option", 0, 2);
         switch (command) {
             case 0:
                 break;
@@ -144,8 +144,8 @@ public class Post extends Comment {
                 System.out.printf("Confirm delete of the post: \"%s\"\n1. No\n2. Yes\n", title);
                 command = Tools.handleErrors("an option", 1, 2);
                 if (command == 2) {
-                    getSubreddit().posts.remove(this);
-                    getPublisher().getNotifications().add(new Notification("Post Deletion", "Your post in the subreddit: " + getSubreddit().title + " with title: " + title + ", was deleted by an admin"));
+                    getSubreddit().getPosts().remove(this);
+                    getPublisher().getNotifications().add(new Notification("Post Deletion", "Your post in the subreddit: " + getSubreddit().getTitle() + " with title: " + title + ", was deleted by an admin"));
                     System.out.println("Post deleted successfully");
                 }
                 break;
@@ -153,11 +153,12 @@ public class Post extends Comment {
                 System.out.printf("Confirm ban of the publisher: \"%s\"\n1. No\n2. Yes\n", getPublisher().getUsername());
                 command = Tools.handleErrors("an option", 1, 2);
                 if (command == 2) {
-                    getSubreddit().bannedUsers.add(getPublisher());
-                    getSubreddit().admins.remove(getPublisher());
-                    getSubreddit().posts.remove(this);
-                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your post in the subreddit: " + getSubreddit().title + " with title: " + title + ", you have been banned from this subreddit"));
+                    getSubreddit().getBannedUsers().add(getPublisher());
+                    getSubreddit().getAdmins().remove(getPublisher());
+                    getSubreddit().getPosts().remove(this);
+                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your post in the subreddit: " + getSubreddit().getTitle() + " with title: " + title + ", you have been banned from this subreddit"));
                     System.out.println("User banned and post deleted successfully");
+
                 }
                 break;
         }

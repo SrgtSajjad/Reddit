@@ -54,13 +54,13 @@ public class Comment {
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + (user.getComments().contains(this) ? "\n3. Edit Comment" : "") + (getSubreddit().admins.contains(user) ? "\n4. Admin Actions" : ""));
+            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + (user.getComments().contains(this) ? "\n3. Edit Comment" : "") + (getSubreddit().getAdmins().contains(user) ? "\n4. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, (subreddit.admins.contains(user) ? 4 : (user == publisher ? 3 : 2)));
+            command = Tools.handleErrors("an option", 0, (subreddit.getAdmins().contains(user) ? 4 : (user == publisher ? 3 : 2)));
             switch (command) {
                 case 0:
                     return;
@@ -90,11 +90,11 @@ public class Comment {
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
-                case 4:
-                    if (getSubreddit().admins.contains(getPublisher()) && getSubreddit().creator != user) {
-                        System.out.println("Publisher of this post is an admin, admin actions is not available for this post");
-                    } else if (getSubreddit().admins.contains(user) || getSubreddit().creator == user)
-                        adminActions();
+                case 4: // open admin actions if user is an admin
+                    if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
+                        System.out.println("Publisher of this comment is an admin, admin actions is not available for this comment");
+                    } else if (getSubreddit().getAdmins().contains(user))
+                        adminActions(user);
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
@@ -103,7 +103,7 @@ public class Comment {
         }
     }
 
-    public void adminActions() throws InterruptedException {
+    public void adminActions(User user) throws InterruptedException {
         int command;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Admin Actions: \n0. Cancel\n1. Delete Comment\n2. Ban publisher from subreddit");
@@ -115,8 +115,8 @@ public class Comment {
                 System.out.println("Confirm delete of the comment\n1. No\n2. Yes\n");
                 command = Tools.handleErrors("an option", 1, 2);
                 if (command == 2) {
-                    getSubreddit().posts.remove(this);
-                    getPublisher().getNotifications().add(new Notification("Comment Deletion", "Your comment in the subreddit: " + getSubreddit().title + " for post with title: " + post.getTitle() + ", was deleted by an admin"));
+                    getSubreddit().getPosts().remove(this);
+                    getPublisher().getNotifications().add(new Notification("Comment Deletion", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was deleted by an admin"));
                     System.out.println("Post deleted successfully");
                 }
                 break;
@@ -124,10 +124,10 @@ public class Comment {
                 System.out.printf("Confirm ban of the publisher: \"%s\"\n1. No\n2. Yes\n", getPublisher().getUsername());
                 command = Tools.handleErrors("an option", 1, 2);
                 if (command == 2) {
-                    getSubreddit().bannedUsers.add(getPublisher());
-                    getSubreddit().admins.remove(getPublisher());
-                    getSubreddit().posts.remove(this);
-                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your comment in the subreddit: " + getSubreddit().title + " for the post with title: " + post.getTitle() + ", you have been banned from this subreddit"));
+                    getSubreddit().getBannedUsers().add(getPublisher());
+                    getSubreddit().getAdmins().remove(getPublisher());
+                    getSubreddit().getPosts().remove(this);
+                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your comment in the subreddit: " + getSubreddit().getTitle() + " for the post with title: " + post.getTitle() + ", you have been banned from this subreddit"));
                     System.out.println("User banned and post deleted successfully");
                 }
                 break;

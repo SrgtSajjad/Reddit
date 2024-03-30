@@ -6,18 +6,46 @@ import SBU.CS.Database;
 import java.util.ArrayList;
 
 public class Subreddit {
-    String title;
-    User creator;
-    ArrayList<User> admins = new ArrayList<>();
-    ArrayList<Post> posts = new ArrayList<>();
-    ArrayList<User> members = new ArrayList<>();
-    ArrayList<User> bannedUsers = new ArrayList<>();
+    private String title;
+    private User creator;
+    private ArrayList<User> admins = new ArrayList<>();
+    private ArrayList<Post> posts = new ArrayList<>();
+    private ArrayList<User> members = new ArrayList<>();
+    private ArrayList<User> bannedUsers = new ArrayList<>();
 
     public Subreddit(String title, User creator) {
         this.title = title;
         this.creator = creator;
         admins.add(creator); // automatically add the creator to the subreddit's admin list
-        Database.subreddits.add(this); // add the created subreddit to the database
         members.add(creator);
+        Database.subreddits.add(this); // add the created subreddit to the database
+    }
+
+    public void displayBrief() {
+        // ToDo
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public ArrayList<User> getAdmins() {
+        return admins;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public ArrayList<User> getMembers() {
+        return members;
+    }
+
+    public ArrayList<User> getBannedUsers() {
+        return bannedUsers;
     }
 }
