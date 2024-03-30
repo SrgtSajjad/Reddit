@@ -7,10 +7,7 @@ import SBU.CS.Subreddit.Post;
 import SBU.CS.Subreddit.Subreddit;
 import SBU.CS.Tools;
 
-import javax.tools.Tool;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 import static java.lang.Thread.sleep;
 
@@ -119,7 +116,7 @@ public class User extends Account {
                     }
                     command = Tools.handleErrors("an option", 0, posts.size());
                     if (command != 0)
-                        posts.get(command - 1).viesUserActions(this);
+                        posts.get(command - 1).viewUserActions(this);
                     break;
                 case 3:
                     i = 0;
@@ -131,7 +128,7 @@ public class User extends Account {
                     }
                     command = Tools.handleErrors("an option", 0, posts.size());
                     if (command != 0)
-                        comments.get(command - 1).viesUserActions(this);
+                        comments.get(command - 1).viewUserActions(this);
                     break;
                 case 4:
                     System.out.printf("Post karma: %d | Comment karma: %d \n", getPostKarma(), getCommentKarma());
@@ -275,6 +272,33 @@ public class User extends Account {
         }
     }
 
+    private void getTimeline() throws InterruptedException {
+        ArrayList<Post> timeline = new ArrayList<>();
+        for (Subreddit subreddit : joinedSubreddits) {
+            timeline.addAll(subreddit.getPosts());
+        }
+
+        timeline.sort(Comparator.comparing(Post::getTimePublished)); // sort timeline according to post times
+
+        int i = 0;
+        while (true) {
+            Tools.clearScreen();
+            i = 0;
+            System.out.println("0. Exit");
+            for (Post post : timeline) {
+                i++;
+                System.out.println(i + ". ");
+                post.displayBrief();
+            }
+            int input = Tools.handleErrors("a post", 0, timeline.size());
+            if (input == 0) {
+                break;
+            }
+            timeline.get(input - 1).viewUserActions(this);
+        }
+
+    }
+
     public void getUserPanel() throws InterruptedException { // TODO
         Tools.clearScreen();
         boolean flag = true;
@@ -302,6 +326,9 @@ public class User extends Account {
                     break;
                 case 3:
                     createSubreddit();
+                    break;
+                case 4:
+                    getTimeline();
                     break;
             }
         }

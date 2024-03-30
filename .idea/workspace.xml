@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="update encapsulation of Post and Comment classes">
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="implemented create subreddit and post methods for user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +83,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java&quot;
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="SharedIndexes">
@@ -280,7 +279,127 @@
       <option name="project" value="LOCAL" />
       <updated>1711635793667</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="update Comment.displayComplete and Post.displayComplete">
+      <option name="closed" value="true" />
+      <created>1711667532955</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711667532955</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Notification class created">
+      <option name="closed" value="true" />
+      <created>1711701461012</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701461012</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Display complete methods updated">
+      <option name="closed" value="true" />
+      <created>1711701478044</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701478044</updated>
+    </task>
+    <task id="LOCAL-00026" summary="getter and setters updated in User class">
+      <option name="closed" value="true" />
+      <created>1711701499671</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701499671</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Subreddit field attributes updated">
+      <option name="closed" value="true" />
+      <created>1711701518257</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701518257</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Getter and setters updated in Account class">
+      <option name="closed" value="true" />
+      <created>1711701564126</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701564126</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updated banned users options">
+      <option name="closed" value="true" />
+      <created>1711701849274</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711701849274</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Add colors to tools">
+      <option name="closed" value="true" />
+      <created>1711704523211</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1711704523211</updated>
+    </task>
+    <task id="LOCAL-00031" summary="add time created to Account class">
+      <option name="closed" value="true" />
+      <created>1711704616319</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1711704616319</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Created User.myProfile method">
+      <option name="closed" value="true" />
+      <created>1711719450474</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1711719450474</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Refactor displayComplete methods">
+      <option name="closed" value="true" />
+      <created>1711791990881</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1711791990881</updated>
+    </task>
+    <task id="LOCAL-00034" summary="updated encapsulation of Subreddit package">
+      <option name="closed" value="true" />
+      <created>1711798535149</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1711798535149</updated>
+    </task>
+    <task id="LOCAL-00035" summary="updated AccountManagement interface">
+      <option name="closed" value="true" />
+      <created>1711801264355</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1711801264355</updated>
+    </task>
+    <task id="LOCAL-00036" summary="updated Subreddit attributes">
+      <option name="closed" value="true" />
+      <created>1711801279560</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1711801279560</updated>
+    </task>
+    <task id="LOCAL-00037" summary="implemented create subreddit and post methods for user">
+      <option name="closed" value="true" />
+      <created>1711801306959</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1711801306959</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,17 +420,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial commit" />
-    <MESSAGE value="Create Account class" />
-    <MESSAGE value="create getters" />
-    <MESSAGE value="create static methods clearScreen and handleErrors" />
-    <MESSAGE value="clean up code" />
-    <MESSAGE value="created Tools.java for general terminal uses" />
-    <MESSAGE value="Main refactored" />
-    <MESSAGE value="Created Post.java and  Subreddit.java classes" />
-    <MESSAGE value="Created Database.java" />
-    <MESSAGE value="Created Comment.java" />
-    <MESSAGE value="Created User.java" />
     <MESSAGE value="Add Subreddit field attributes" />
     <MESSAGE value="update Account attributes" />
     <MESSAGE value="updated Tools.handleErrors" />
@@ -322,7 +430,22 @@
     <MESSAGE value="create display methods for Comment and Post class" />
     <MESSAGE value="Update Tools.handleErrors" />
     <MESSAGE value="update encapsulation of Post and Comment classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="update encapsulation of Post and Comment classes" />
+    <MESSAGE value="update Comment.displayComplete and Post.displayComplete" />
+    <MESSAGE value="Notification class created" />
+    <MESSAGE value="Display complete methods updated" />
+    <MESSAGE value="getter and setters updated in User class" />
+    <MESSAGE value="Subreddit field attributes updated" />
+    <MESSAGE value="Getter and setters updated in Account class" />
+    <MESSAGE value="Updated banned users options" />
+    <MESSAGE value="Add colors to tools" />
+    <MESSAGE value="add time created to Account class" />
+    <MESSAGE value="Created User.myProfile method" />
+    <MESSAGE value="Refactor displayComplete methods" />
+    <MESSAGE value="updated encapsulation of Subreddit package" />
+    <MESSAGE value="updated AccountManagement interface" />
+    <MESSAGE value="updated Subreddit attributes" />
+    <MESSAGE value="implemented create subreddit and post methods for user" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented create subreddit and post methods for user" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -367,6 +490,10 @@
       "currentBranchFilter": true
     },
     {
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
       "currentBranchFilter": true
     },
     {

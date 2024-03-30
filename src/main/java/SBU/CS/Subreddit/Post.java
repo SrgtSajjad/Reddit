@@ -48,7 +48,7 @@ public class Post extends Comment {
     }
 
     @Override
-    public void viesUserActions(User user) throws InterruptedException {
+    public void viewUserActions(User user) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         boolean hasUpVoted, hasDownVoted;
         int command;
@@ -109,7 +109,7 @@ public class Post extends Comment {
                     if (command == 0) {
                         return;
                     } else {
-                        comments.get(command - 1).viesUserActions(user);
+                        comments.get(command - 1).viewUserActions(user);
                     }
                     break;
                 case 5: // edit post if it belongs to the user

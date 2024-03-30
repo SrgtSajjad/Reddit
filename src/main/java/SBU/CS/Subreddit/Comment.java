@@ -44,7 +44,7 @@ public class Comment {
 
     }
 
-    public void viesUserActions(User user) throws InterruptedException {
+    public void viewUserActions(User user) throws InterruptedException {
 
         boolean hasUpVoted, hasDownVoted;
         int command;
