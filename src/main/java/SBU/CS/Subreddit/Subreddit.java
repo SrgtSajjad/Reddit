@@ -12,9 +12,11 @@ public class Subreddit {
     private ArrayList<Post> posts = new ArrayList<>();
     private ArrayList<User> members = new ArrayList<>();
     private ArrayList<User> bannedUsers = new ArrayList<>();
+    private String explanation;
 
-    public Subreddit(String title, User creator) {
+    public Subreddit(String title, String explanation , User creator) {
         this.title = title;
+        this.explanation = explanation;
         this.creator = creator;
         admins.add(creator); // automatically add the creator to the subreddit's admin list
         members.add(creator);
