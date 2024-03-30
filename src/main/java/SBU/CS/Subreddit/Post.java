@@ -36,22 +36,26 @@ public class Post extends Comment {
     }
 
     @Override
-    public void displayComplete(User user) throws InterruptedException {
+    public void displayComplete(User user) {
+        System.out.println("r/" + getPublisher().getUsername());
+        System.out.printf("u/%s - %d/%d/%d at %d:%d\n", getPublisher().getUsername(), getTimePublished().getYear(), getTimePublished().getMonthValue(), getTimePublished().getDayOfMonth(), getTimePublished().getHour(), getTimePublished().getMinute());
+        System.out.println("### " + this.title);
+        System.out.println("## " + this.getText());
+        for (String tag : flairTags) {
+            System.out.print("#" + tag + " ");
+        }
+        System.out.println("Karma: " + getKarma());
+    }
 
+    @Override
+    public void viesUserActions(User user) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         boolean hasUpVoted, hasDownVoted;
         int command;
 
         while (true) {
             Tools.clearScreen();
-            System.out.println("r/" + getPublisher().getUsername());
-            System.out.printf("u/%s - %d/%d/%d at %d:%d\n", getPublisher().getUsername(), getTimePublished().getYear(), getTimePublished().getMonthValue(), getTimePublished().getDayOfMonth(), getTimePublished().getHour(), getTimePublished().getMinute());
-            System.out.println("### " + this.title);
-            System.out.println("## " + this.getText());
-            for (String tag : flairTags) {
-                System.out.print("#" + tag + " ");
-            }
-            System.out.println("Karma: " + getKarma());
+            displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
             System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().admins.contains(user) ? "\n6. Admin Actions" : ""));
@@ -105,7 +109,7 @@ public class Post extends Comment {
                     if (command == 0) {
                         return;
                     } else {
-                        comments.get(command - 1).displayComplete(user);
+                        comments.get(command - 1).viesUserActions(user);
                     }
                     break;
                 case 5: // edit post if it belongs to the user

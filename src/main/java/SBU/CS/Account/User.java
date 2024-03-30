@@ -98,7 +98,6 @@ public class User extends Account {
                     3. Comments
                     4. About
                     """);
-            Scanner scanner = new Scanner(System.in);
             int command = 0;
             switch (command) {
                 case 0:
@@ -117,7 +116,7 @@ public class User extends Account {
                     }
                     command = Tools.handleErrors("an option", 0, posts.size());
                     if (command != 0)
-                        posts.get(command - 1).displayComplete(this);
+                        posts.get(command - 1).viesUserActions(this);
                     break;
                 case 3:
                     i = 0;
@@ -129,7 +128,7 @@ public class User extends Account {
                     }
                     command = Tools.handleErrors("an option", 0, posts.size());
                     if (command != 0)
-                        comments.get(command - 1).displayComplete(this);
+                        comments.get(command - 1).viesUserActions(this);
                     break;
                 case 4:
                     System.out.printf("Post karma: %d | Comment karma: %d \n", getPostKarma(), getCommentKarma());
@@ -197,7 +196,7 @@ public class User extends Account {
     }
 
 
-    public void panel() throws InterruptedException { // TODO
+    public void getUserPanel() throws InterruptedException { // TODO
         Tools.clearScreen();
         boolean flag = true;
         while (flag) {

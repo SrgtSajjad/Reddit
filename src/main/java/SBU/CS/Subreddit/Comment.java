@@ -4,7 +4,6 @@ import SBU.CS.Account.User;
 import SBU.CS.Notification;
 import SBU.CS.Tools;
 
-import javax.tools.Tool;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +20,7 @@ public class Comment {
     ArrayList<User> downVoters = new ArrayList<>();
 
     public Comment(String text, User publisher, Subreddit subreddit, Post post) {
-        this.subreddit =subreddit;
+        this.subreddit = subreddit;
         this.text = text;
         this.publisher = publisher;
         this.post = post;
@@ -39,15 +38,20 @@ public class Comment {
     }
 
     public void displayComplete(User user) throws InterruptedException {
-        Scanner scanner = new Scanner(System.in);
+        System.out.printf("u/%s - %d/%d/%d at %d:%d\n", publisher.getUsername(), timePublished.getYear(), timePublished.getMonthValue(), timePublished.getDayOfMonth(), timePublished.getHour(), timePublished.getMinute());
+        System.out.println("## " + this.text);
+        System.out.println("Karma: " + getKarma());
+
+    }
+
+    public void viesUserActions(User user) throws InterruptedException {
+
         boolean hasUpVoted, hasDownVoted;
         int command;
 
         while (true) {
             Tools.clearScreen();
-            System.out.printf("u/%s - %d/%d/%d at %d:%d\n", publisher.getUsername(), timePublished.getYear(), timePublished.getMonthValue(), timePublished.getDayOfMonth(), timePublished.getHour(), timePublished.getMinute());
-            System.out.println("## " + this.text);
-            System.out.println("Karma: " + getKarma());
+            displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
             System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + (user.getComments().contains(this) ? "\n3. Edit Comment" : "") + (getSubreddit().admins.contains(user) ? "\n4. Admin Actions" : ""));
@@ -56,7 +60,7 @@ public class Comment {
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, (subreddit.admins.contains(user) ? 4 : (user == publisher ? 3 : 2 )));
+            command = Tools.handleErrors("an option", 0, (subreddit.admins.contains(user) ? 4 : (user == publisher ? 3 : 2)));
             switch (command) {
                 case 0:
                     return;
