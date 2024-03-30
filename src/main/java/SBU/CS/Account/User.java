@@ -1,12 +1,15 @@
 package SBU.CS.Account;
 
+import SBU.CS.Database;
 import SBU.CS.Notification;
 import SBU.CS.Subreddit.Comment;
 import SBU.CS.Subreddit.Post;
 import SBU.CS.Subreddit.Subreddit;
 import SBU.CS.Tools;
 
+import javax.tools.Tool;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
@@ -19,8 +22,8 @@ public class User extends Account {
     private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>();
     private ArrayList<Notification> notifications = new ArrayList<>();
 
-    public User(String username, String password, String firstName, String lastName, Birthday birthday) {
-        super(username, password, firstName, lastName, birthday);
+    public User(String username, String password, String firstName, String lastName, Birthday birthday, String email) {
+        super(username, password, firstName, lastName, birthday, email);
     }
 
     public int getTotalKarma() {
@@ -145,19 +148,21 @@ public class User extends Account {
             Tools.clearScreen();
             System.out.println("~~| Edit Profile |~~");
             System.out.println("Username: " + getUsername());
+            System.out.println("Email: " + getEmail());
             System.out.println("First Name: " + getFirstName());
             System.out.println("Last Name: " + getLastName());
-            System.out.printf("Birthday: %d/%d/%d", getBirthday().year, getBirthday().month, getBirthday().day);
+            System.out.printf("Birthday: %d/%d/%d - Age: ", getBirthday().year, getBirthday().month, getBirthday().day, getAge());
 
             System.out.println("""
 
                     0. Exit
                     1. Change Username
-                    2. Change Password
-                    3. Change First Name
-                    4. Change Last Name
-                    5. change Birthday""");
-            int command = Tools.handleErrors("an option", 0, 5);
+                    2. Change email
+                    3. Change Password
+                    4. Change First Name
+                    5. Change Last Name
+                    6. change Birthday""");
+            int command = Tools.handleErrors("an option", 0, 6);
             String input;
             scanner.nextLine();
             switch (command) {
@@ -169,32 +174,106 @@ public class User extends Account {
                     input = scanner.nextLine();
                     if (Tools.verifyChanges(input))
                         changeUsername(input);
+                    else
+                        System.out.print("Invalid input: Do not use SPACES");
                     break;
                 case 2:
                     System.out.print("New Password: ");
                     input = scanner.nextLine();
                     if (Tools.verifyChanges(input))
                         changePassword(input);
+                    else
+                        System.out.print("Invalid input: Do not use SPACES");
                     break;
                 case 3:
+                    System.out.print("New Email: ");
+                    input = scanner.nextLine();
+                    if (Tools.validateEmailFormat(input))
+                        changeEmail(input);
+                    else
+                        System.out.print("Invalid input: Do not use SPACES");
+                    break;
+                case 4:
                     System.out.print("New First Name: ");
                     input = scanner.nextLine();
                     if (Tools.verifyChanges(input))
                         changeFirstName(input);
+                    else
+                        System.out.print("Invalid input: Do not use SPACES");
                     break;
-                case 4:
+                case 5:
                     System.out.print("New Last Name: ");
                     input = scanner.nextLine();
                     if (Tools.verifyChanges(input))
                         changeLastName(input);
+                    else
+                        System.out.print("Invalid input: Do not use SPACES");
                     break;
-                case 5:
+                case 6:
                     changeBirthday(Birthday.getBirthday());
+                    break;
             }
             sleep(200);
         }
     }
 
+    private void createPost() {
+        Scanner scanner = new Scanner(System.in);
+        int i = 0;
+        System.out.print("0. Cancel");
+        for (Subreddit subreddit : joinedSubreddits) {
+            i++;
+            System.out.printf("%d. r/%s : %d members", i, subreddit.getTitle(), subreddit.getMembers().size());
+        }
+        int number = Tools.handleErrors("a subreddit", 0, joinedSubreddits.size());
+        if (number == 0) {
+            return;
+        }
+        Subreddit subreddit = joinedSubreddits.get(number - 1);
+        System.out.print("Title: ");
+        String title = scanner.nextLine();
+        System.out.print("Text: ");
+        String text = scanner.nextLine();
+
+        System.out.println("Confirm creation of post: " +
+                "\nTitle: " + title +
+                "\nText" + text +
+                "\nSubreddit" + subreddit.getTitle() +
+                "\n1. Yes" +
+                "\n2. No");
+        if (Tools.handleErrors("an option", 1, 2) == 1) {
+            Post post = new Post(title, text, subreddit, this, Post.inputTags());
+            posts.addFirst(post);
+            System.out.print("Post created successfully");
+        }
+    }
+
+    private void createSubreddit() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Title: ");
+        String title = scanner.nextLine();
+        for (Subreddit subreddit : Database.subreddits) {
+            if (Objects.equals(subreddit.getTitle(), title)) {
+                System.out.print("Invalid title: There is already a subreddit with this name, please try again later");
+                return;
+            }
+        }
+        System.out.print("Explanation: ");
+        String explanation = scanner.nextLine();
+
+        System.out.println("Confirm creation of subreddit: " +
+                "\nTitle: " + title +
+                "\nExplanation" + explanation +
+                "\n1. Yes" +
+                "\n2. No");
+        if (Tools.handleErrors("an option", 1, 2) == 1) {
+            Subreddit subreddit = new Subreddit(title, explanation, this);
+            joinedSubreddits.add(subreddit);
+            System.out.print("Subreddit created successfully");
+
+        }
+    }
 
     public void getUserPanel() throws InterruptedException { // TODO
         Tools.clearScreen();
@@ -217,6 +296,12 @@ public class User extends Account {
                     break;
                 case 1:
                     myProfile();
+                    break;
+                case 2:
+                    createPost();
+                    break;
+                case 3:
+                    createSubreddit();
                     break;
             }
         }
