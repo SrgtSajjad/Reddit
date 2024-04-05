@@ -410,7 +410,16 @@ public class User extends Account {
     }
 
     private void displayInbox() {
-        //TODO
+        Tools.clearScreen();
+        System.out.println("~~| Inbox |~~");
+        Scanner scanner = new Scanner(System.in);
+        int i = 0;
+        for (Notification notification: notifications) {
+            i++;
+            System.out.printf("%d. Title: %s , Details: %s\n", i, notification.getTitle(), notification.getText());
+        }
+        System.out.println("Type anything to exit");
+        String input = scanner.nextLine();
     }
 
     public void displayUserPanel() throws InterruptedException { // display user's panel
@@ -429,6 +438,7 @@ public class User extends Account {
                     6. Search
                     7. Inbox""");
             // ToDo messaging and save posts and following users
+            // ToDO allow user to see upvoted posts or comments
             int command = Tools.handleErrors("an option", 0, 6);
             switch (command) {
                 case 0:

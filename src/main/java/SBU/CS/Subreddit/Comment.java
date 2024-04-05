@@ -74,6 +74,7 @@ public class Comment {
                     } else {
                         this.upVoters.add(user);
                         user.getUpVotedComments().add(this);
+                        getPublisher().getNotifications().addFirst(new Notification("Comment up-voted", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was up-voted"));
                         System.out.println("Up-voted successfully");
                     }
                     break;
@@ -83,6 +84,7 @@ public class Comment {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.downVoters.add(user);
+                        getPublisher().getNotifications().addFirst(new Notification("Comment down-voted", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was down-voted"));
                         System.out.println("Down-voted successfully");
                     }
                     break;
@@ -118,7 +120,7 @@ public class Comment {
                 command = Tools.handleErrors("an option", 1, 2);
                 if (command == 2) {
                     getSubreddit().getPosts().remove(this);
-                    getPublisher().getNotifications().add(new Notification("Comment Deletion", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was deleted by an admin"));
+                    getPublisher().getNotifications().addFirst(new Notification("Comment Deletion", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was deleted by an admin"));
                     System.out.println("Post deleted successfully");
                 }
                 break;
@@ -129,7 +131,7 @@ public class Comment {
                     getSubreddit().getBannedUsers().add(getPublisher());
                     getSubreddit().getAdmins().remove(getPublisher());
                     getSubreddit().getPosts().remove(this);
-                    getPublisher().getNotifications().add(new Notification("Banned from subreddit", "Due to your comment in the subreddit: " + getSubreddit().getTitle() + " for the post with title: " + post.getTitle() + ", you have been banned from this subreddit"));
+                    getPublisher().getNotifications().addFirst(new Notification("Banned from subreddit", "Due to your comment in the subreddit: " + getSubreddit().getTitle() + " for the post with title: " + post.getTitle() + ", you have been banned from this subreddit"));
                     System.out.println("User banned and post deleted successfully");
                 }
                 break;
