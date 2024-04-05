@@ -8,6 +8,7 @@ import SBU.CS.Subreddit.Subreddit;
 import SBU.CS.Tools;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static java.lang.Thread.sleep;
 
@@ -162,7 +163,7 @@ public class User extends Account {
                 case 1:
                     System.out.print("New Username: ");
                     input = scanner.nextLine();
-                    if (Tools.verifyChanges(input))
+                    if (Tools.stringIsValid(input))
                         changeUsername(input);
                     else
                         System.out.print("Invalid input: Do not use SPACES");
@@ -170,7 +171,7 @@ public class User extends Account {
                 case 2:
                     System.out.print("New Password: ");
                     input = scanner.nextLine();
-                    if (Tools.verifyChanges(input))
+                    if (Tools.stringIsValid(input))
                         changePassword(input);
                     else
                         System.out.print("Invalid input: Do not use SPACES");
@@ -186,7 +187,7 @@ public class User extends Account {
                 case 4:
                     System.out.print("New First Name: ");
                     input = scanner.nextLine();
-                    if (Tools.verifyChanges(input))
+                    if (Tools.stringIsValid(input))
                         changeFirstName(input);
                     else
                         System.out.print("Invalid input: Do not use SPACES");
@@ -194,7 +195,7 @@ public class User extends Account {
                 case 5:
                     System.out.print("New Last Name: ");
                     input = scanner.nextLine();
-                    if (Tools.verifyChanges(input))
+                    if (Tools.stringIsValid(input))
                         changeLastName(input);
                     else
                         System.out.print("Invalid input: Do not use SPACES");
@@ -243,9 +244,12 @@ public class User extends Account {
 
         System.out.print("Title: ");
         String title = scanner.nextLine();
+        if (!Tools.stringIsValid(title))
+            return;
+
         for (Subreddit subreddit : Database.subreddits) {
             if (Objects.equals(subreddit.getTitle(), title)) {
-                System.out.print("Invalid title: There is already a subreddit with this name, please try again later");
+                System.out.print("Invalid title: There is already a subreddit with this name, please try again");
                 return;
             }
         }
@@ -313,10 +317,102 @@ public class User extends Account {
         }
     }
 
+    private void searchDatabase() {
+        String searchPrompt;
+
+        while (true) {
+            Tools.clearScreen();
+            System.out.println("~~| Search |~~");
+            searchPrompt = getSearchPrompt();
+            if (searchPrompt.equals("exit"))
+                return;
+            else
+                displaySearchResults(searchPrompt);
+        }
+    }
+
+    private String getSearchPrompt() {
+        String searchPrompt;
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("(type \"exit\" to leave to your panel)");
+            System.out.print("Search Prompt: ");
+            searchPrompt = scanner.nextLine();
+
+            String pattern = "^[a-zA-Z0-9_]+$";
+            if (Pattern.matches(pattern, searchPrompt) || searchPrompt.equals("exit"))
+                return searchPrompt;
+
+            System.out.print("Invalid input: Entered string should have at least 1 characters and only contain alphabets, numbers, underscores and \"u/\" or \"r/\"");
+        }
+    }
+
+    private void displaySearchResults(String prompt) {
+        int i, command;
+        ArrayList<Subreddit> subredditResults = new ArrayList<>();
+        ArrayList<User> userResults = new ArrayList<>();
+        // find search results
+        if (prompt.contains("r/")) {
+            prompt = prompt.replaceFirst("r/", "");
+            for (Subreddit subreddit : Database.subreddits) {
+                if (subreddit.getTitle().contains(prompt)) {
+                    subredditResults.add(subreddit);
+                }
+            }
+        } else if (prompt.contains("u/")) {
+            prompt = prompt.replaceFirst("u/", "");
+            for (User user : Database.users) {
+                if (user.getUsername().contains(prompt)) {
+                    userResults.add(user);
+                }
+            }
+        } else {
+            for (Subreddit subreddit : Database.subreddits) {
+                if (subreddit.getTitle().contains(prompt)) {
+                    subredditResults.add(subreddit);
+                }
+            }
+            for (User user : Database.users) {
+                if (user.getUsername().contains(prompt)) {
+                    userResults.add(user);
+                }
+            }
+        }
+
+        while (true) {
+            System.out.printf("Results for %s: \n", prompt);
+            System.out.println("0. Exit");
+            i = 0;
+            System.out.println("Communities: ");
+            for (Subreddit subreddit : subredditResults) {
+                i++;
+                System.out.println(i + ". ");
+                subreddit.displayBrief();
+            }
+            System.out.println("Users: ");
+            for (User user : userResults) {
+                i++;
+                System.out.println(i + ". u/" + user.getUsername());
+                // ToDo needs change after addition of following users
+            }
+
+            command = Tools.handleErrors("an option", 0, subredditResults.size() + userResults.size());
+            if (command == 0)
+                break;
+            if (command > subredditResults.size()) {
+                System.out.println("Selecting users is currently unavailable :)");
+            }
+            else {
+                subredditResults.get(command - 1).displayComplete();
+            }
+        }
+
+    }
+
     public void displayUserPanel() throws InterruptedException { // display user's panel
-        Tools.clearScreen();
         boolean flag = true;
         while (flag) {
+            Tools.clearScreen();
             System.out.println("""
                     ~~| Your Panel |~~
                                         
@@ -328,7 +424,7 @@ public class User extends Account {
                     5. Communities
                     6. Search
                     7. Inbox""");
-            // ToDo messaging and save posts and friend requests
+            // ToDo messaging and save posts and following users
             int command = Tools.handleErrors("an option", 0, 6);
             switch (command) {
                 case 0:
@@ -348,7 +444,9 @@ public class User extends Account {
                     break;
                 case 5:
                     displayJoinedSubreddits();
-
+                    break;
+                case 6:
+                    searchDatabase();
             }
         }
     }
