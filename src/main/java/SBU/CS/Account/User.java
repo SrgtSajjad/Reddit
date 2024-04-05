@@ -12,31 +12,24 @@ import java.util.*;
 import static java.lang.Thread.sleep;
 
 public class User extends Account {
-    private ArrayList<Post> posts = new ArrayList<>();
-    private ArrayList<Comment> comments = new ArrayList<>();
-    private ArrayList<Post> upVotedPosts = new ArrayList<>();
-    private ArrayList<Comment> upVotedComments = new ArrayList<>();
-    private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>();
-    private ArrayList<Notification> notifications = new ArrayList<>();
+    private ArrayList<Post> posts = new ArrayList<>(); // posts published by user
+    private ArrayList<Comment> comments = new ArrayList<>(); // replies written by user
+    private ArrayList<Post> upVotedPosts = new ArrayList<>(); // posts the user has upvoted
+    private ArrayList<Comment> upVotedComments = new ArrayList<>(); // comments the user has upvoted
+    private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
+    private ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
 
     public User(String username, String password, String firstName, String lastName, Birthday birthday, String email) {
         super(username, password, firstName, lastName, birthday, email);
     }
 
-    public int getTotalKarma() {
-        int karma = 0;
-        for (Post post : posts) {
-            karma += post.getKarma();
-        }
-
-        for (Comment comment : comments) {
-            karma += comment.getKarma();
-        }
+    public int getTotalKarma() { // calculate the user's total karma
+        int karma = getPostKarma() + getCommentKarma();
 
         return karma;
     }
 
-    public int getPostKarma() {
+    public int getPostKarma() { // calculate the post karma
         int karma = 0;
         for (Post post : posts) {
             karma += post.getKarma();
@@ -46,7 +39,7 @@ public class User extends Account {
         return karma;
     }
 
-    public int getCommentKarma() {
+    public int getCommentKarma() { // calculate the comment karma
         int karma = 0;
 
         for (Comment comment : comments) {
@@ -81,7 +74,7 @@ public class User extends Account {
         return notifications;
     }
 
-    public void myProfile() throws InterruptedException {
+    public void displayMyProfile() throws InterruptedException { // display user's profile panel
         int i;
         boolean flag = true;
         while (flag) {
@@ -138,7 +131,7 @@ public class User extends Account {
         }
     }
 
-    private void editProfile() throws InterruptedException {
+    private void editProfile() throws InterruptedException { // allow user to edit different parts of their profile
         boolean flag = true;
         Scanner scanner = new Scanner(System.in);
         while (flag) {
@@ -214,7 +207,7 @@ public class User extends Account {
         }
     }
 
-    private void createPost() {
+    private void createPost() { // creates a post with the user as publisher
         Scanner scanner = new Scanner(System.in);
         int i = 0;
         System.out.print("0. Cancel");
@@ -245,7 +238,7 @@ public class User extends Account {
         }
     }
 
-    private void createSubreddit() {
+    private void createSubreddit() { // allows user to create a custom subreddit
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Title: ");
@@ -272,7 +265,7 @@ public class User extends Account {
         }
     }
 
-    private void getTimeline() throws InterruptedException {
+    private void displayTimeline() throws InterruptedException { // displays user's timeline from followed subreddits
         ArrayList<Post> timeline = new ArrayList<>();
         for (Subreddit subreddit : joinedSubreddits) {
             timeline.addAll(subreddit.getPosts());
@@ -280,9 +273,10 @@ public class User extends Account {
 
         timeline.sort(Comparator.comparing(Post::getTimePublished)); // sort timeline according to post times
 
-        int i = 0;
+        int i;
         while (true) {
             Tools.clearScreen();
+            System.out.println("~~| Timeline |~~");
             i = 0;
             System.out.println("0. Exit");
             for (Post post : timeline) {
@@ -299,7 +293,27 @@ public class User extends Account {
 
     }
 
-    public void getUserPanel() throws InterruptedException { // TODO
+    private void displayJoinedSubreddits() throws InterruptedException {
+        int i;
+        while (true) {
+            Tools.clearScreen();
+            System.out.println("~~| Communities |~~");
+            i = 0;
+            System.out.println("0. Exit");
+            for (Subreddit subreddit : joinedSubreddits) {
+                i++;
+                System.out.println(i + ". " + (subreddit.getAdmins().contains(this) ? "(Admin)" : ""));
+                subreddit.displayBrief();
+            }
+            int input = Tools.handleErrors("a post", 0, joinedSubreddits.size());
+            if (input == 0) {
+                break;
+            }
+            joinedSubreddits.get(input - 1).viewUserActions(this);
+        }
+    }
+
+    public void displayUserPanel() throws InterruptedException { // display user's panel
         Tools.clearScreen();
         boolean flag = true;
         while (flag) {
@@ -312,14 +326,16 @@ public class User extends Account {
                     3. Create a Community
                     4. Timeline
                     5. Communities
-                    6. Search""");
+                    6. Search
+                    7. Inbox""");
+            // ToDo messaging and save posts and friend requests
             int command = Tools.handleErrors("an option", 0, 6);
             switch (command) {
                 case 0:
                     flag = false;
                     break;
                 case 1:
-                    myProfile();
+                    displayMyProfile();
                     break;
                 case 2:
                     createPost();
@@ -328,8 +344,11 @@ public class User extends Account {
                     createSubreddit();
                     break;
                 case 4:
-                    getTimeline();
+                    displayTimeline();
                     break;
+                case 5:
+                    displayJoinedSubreddits();
+
             }
         }
     }

@@ -122,7 +122,7 @@ public class Post extends Comment {
                     if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
                         System.out.println("Publisher of this post is an admin, admin actions is not available for this post");
                     } else if (getSubreddit().getAdmins().contains(user))
-                        adminActions(user);
+                        viewAdminActions(user);
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
@@ -132,7 +132,7 @@ public class Post extends Comment {
     }
 
     @Override
-    public void adminActions(User user) throws InterruptedException {
+    public void viewAdminActions(User user) throws InterruptedException {
         int command;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Admin Actions: \n0. Cancel\n1. Delete Post\n2. Ban publisher from subreddit");
