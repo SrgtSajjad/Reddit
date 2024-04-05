@@ -18,18 +18,21 @@ public class Tools {
     public static final String WHITE_COLOR = "\u001B[37m";
 
     public static boolean stringIsValid(String enteredString) {
+        String regex = "^[a-z0-9_]{8,}$";
+        // Regex to match at least 8 characters, containing only alphabets, numbers, and underscores
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(enteredString);
+        boolean valid = matcher.find();
+        if (!valid)
+            System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
 
-        // Regular expression to match at least 8 characters, containing only alphabets, numbers, and underscores
-        String pattern = "^[a-zA-Z0-9_]{8,}$";
-        System.out.print("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
-
-        return Pattern.matches(pattern, enteredString);
+        return valid;
 
 
     }
 
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println();
         }
     }
@@ -61,13 +64,16 @@ public class Tools {
         return number;
     }
 
-    public static boolean validateEmailFormat(String email) { // validates an entered email's  format using regex
-        String regex = ".+@.+\\..+";
+    public static boolean validateEmailFormat(String email) { // validates an entered email's format using regex
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
+        boolean valid = matcher.find();
+        if (!valid)
+            System.out.println("Invalid input: Entered email format is incorrect");
 
-        return matcher.find();
+        return valid;
     }
 
     public static String calculateTimePassed(LocalDateTime timePublished) {

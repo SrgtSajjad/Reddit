@@ -142,7 +142,7 @@ public class User extends Account {
             System.out.println("Email: " + getEmail());
             System.out.println("First Name: " + getFirstName());
             System.out.println("Last Name: " + getLastName());
-            System.out.printf("Birthday: %d/%d/%d - Age: ", getBirthday().year, getBirthday().month, getBirthday().day, getAge());
+            System.out.printf("Birthday: %d/%d/%d - Age: ", getBirthday().getYear(), getBirthday().getMonth(), getBirthday().getDay(), getAge());
 
             System.out.println("""
 
@@ -156,6 +156,7 @@ public class User extends Account {
             int command = Tools.handleErrors("an option", 0, 6);
             String input;
             scanner.nextLine();
+            String regex = "^[a-zA-Z]{2,}$";
             switch (command) {
                 case 0:
                     flag = false;
@@ -187,18 +188,18 @@ public class User extends Account {
                 case 4:
                     System.out.print("New First Name: ");
                     input = scanner.nextLine();
-                    if (Tools.stringIsValid(input))
+                    if (Pattern.matches(regex, input))
                         changeFirstName(input);
                     else
-                        System.out.print("Invalid input: Do not use SPACES");
+                        System.out.print("Invalid input: Entered string should be at least 1 character and only contain alphabets");
                     break;
                 case 5:
                     System.out.print("New Last Name: ");
                     input = scanner.nextLine();
-                    if (Tools.stringIsValid(input))
+                    if (Pattern.matches(regex, input))
                         changeLastName(input);
                     else
-                        System.out.print("Invalid input: Do not use SPACES");
+                        System.out.print("Invalid input: Entered string should be at least 1 character and only contain alphabets");
                     break;
                 case 6:
                     changeBirthday(Birthday.getBirthday());
@@ -401,12 +402,15 @@ public class User extends Account {
                 break;
             if (command > subredditResults.size()) {
                 System.out.println("Selecting users is currently unavailable :)");
-            }
-            else {
+            } else {
                 subredditResults.get(command - 1).displayComplete();
             }
         }
 
+    }
+
+    private void displayInbox() {
+        //TODO
     }
 
     public void displayUserPanel() throws InterruptedException { // display user's panel
@@ -447,6 +451,8 @@ public class User extends Account {
                     break;
                 case 6:
                     searchDatabase();
+                case 7:
+                    displayInbox();
             }
         }
     }

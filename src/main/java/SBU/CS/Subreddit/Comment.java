@@ -7,6 +7,7 @@ import SBU.CS.Tools;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 import static java.lang.Thread.sleep;
 
@@ -18,12 +19,13 @@ public class Comment {
     private Subreddit subreddit;
     ArrayList<User> upVoters = new ArrayList<>();
     ArrayList<User> downVoters = new ArrayList<>();
-
+    private UUID ID;
     public Comment(String text, User publisher, Subreddit subreddit, Post post) {
         this.subreddit = subreddit;
         this.text = text;
         this.publisher = publisher;
         this.post = post;
+        ID = UUID.randomUUID();
         timePublished = LocalDateTime.now(); // for sorting user's timeline based on time
     }
 

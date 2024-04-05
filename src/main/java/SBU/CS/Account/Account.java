@@ -80,7 +80,7 @@ public class Account implements AccountManagement {
 
     @Override
     public void changeBirthday(Birthday newBirthday) {
-        if (Birthday.validateBirthday(newBirthday.year, newBirthday.month, newBirthday.day)) {
+        if (Birthday.validateBirthday(newBirthday.getYear(), newBirthday.getMonth(), newBirthday.getDay())) {
             this.birthday = newBirthday;
             System.out.println("Birthday changed successfully");
         }
@@ -102,7 +102,7 @@ public class Account implements AccountManagement {
     }
 
     public int getAge() {
-        return LocalDateTime.now().getYear() - birthday.year;
+        return LocalDateTime.now().getYear() - birthday.getYear();
     }
 
     public LocalDateTime getTimeCreated() {

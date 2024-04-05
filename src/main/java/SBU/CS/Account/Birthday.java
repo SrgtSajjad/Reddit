@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Birthday {
-    int year;
-    int month;
-    int day;
+    private int year;
+    private int month;
+    private int day;
 
     public Birthday(int year, int month, int day) {
         this.year = year;
@@ -54,5 +54,17 @@ public class Birthday {
 
 
         return new Birthday(year, month, day);
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
     }
 }

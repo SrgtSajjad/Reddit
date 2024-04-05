@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="edited Tools.stringIsValid" />
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="all user methods implemented">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,17 +80,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Reddit [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Reddit [:Main.main()].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -426,7 +435,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712338702654</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="all user methods implemented">
+      <option name="closed" value="true" />
+      <created>1712338826381</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1712338826381</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -447,7 +464,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="edited package" />
     <MESSAGE value="updated Birthday.getBirthday" />
     <MESSAGE value="updated Post.java" />
     <MESSAGE value="create display methods for Comment and Post class" />
@@ -472,7 +488,8 @@
     <MESSAGE value="added User.displayJoinedSubreddits" />
     <MESSAGE value="added User.searchDatabase" />
     <MESSAGE value="edited Tools.stringIsValid" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited Tools.stringIsValid" />
+    <MESSAGE value="all user methods implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="all user methods implemented" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -542,6 +559,10 @@
     {
       "branch": "develop",
       "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
     }
   ],
   "lastFilter": {
@@ -549,4 +570,20 @@
     "currentBranchFilter": true
   }
 }]]></component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
