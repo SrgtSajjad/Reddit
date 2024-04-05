@@ -17,13 +17,15 @@ public class Tools {
     public static final String CYAN_COLOR = "\u001B[36m";
     public static final String WHITE_COLOR = "\u001B[37m";
 
-    public static boolean verifyChanges(String enteredString) {
-        if (enteredString.contains(" ")) {
-            System.out.print("Invalid input: Entered string contains spaces, please try again");
-            return false;
+    public static boolean stringIsValid(String enteredString) {
 
-        }
-        return true;
+        // Regular expression to match at least 8 characters, containing only alphabets, numbers, and underscores
+        String pattern = "^[a-zA-Z0-9_]{8,}$";
+        System.out.print("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
+
+        return Pattern.matches(pattern, enteredString);
+
+
     }
 
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines

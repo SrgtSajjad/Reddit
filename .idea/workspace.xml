@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="add getTimeline method">
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="added User.displayJoinedSubreddits">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -408,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711804440041</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="added User.displayJoinedSubreddits">
+      <option name="closed" value="true" />
+      <created>1712316815063</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1712316815063</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -429,7 +435,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update Account attributes" />
     <MESSAGE value="updated Tools.handleErrors" />
     <MESSAGE value="cleared Main.java" />
     <MESSAGE value="edited package" />
@@ -454,7 +459,8 @@
     <MESSAGE value="updated Subreddit attributes" />
     <MESSAGE value="implemented create subreddit and post methods for user" />
     <MESSAGE value="add getTimeline method" />
-    <option name="LAST_COMMIT_MESSAGE" value="add getTimeline method" />
+    <MESSAGE value="added User.displayJoinedSubreddits" />
+    <option name="LAST_COMMIT_MESSAGE" value="added User.displayJoinedSubreddits" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -499,6 +505,10 @@
       "currentBranchFilter": true
     },
     {
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
       "currentBranchFilter": true
     },
     {
