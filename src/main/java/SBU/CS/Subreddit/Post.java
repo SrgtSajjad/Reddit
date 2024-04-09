@@ -118,7 +118,7 @@ public class Post extends Comment {
                     if (getPublisher() == user)
                         edit();
                     else
-                        System.out.println("Invalid input: Please enter a valid number");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                     break;
                 case 6: // open admin actions if user is an admin
                     if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
@@ -126,7 +126,7 @@ public class Post extends Comment {
                     } else if (getSubreddit().getAdmins().contains(user))
                         viewAdminActions(user);
                     else
-                        System.out.println("Invalid input: Please enter a valid number");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                     break;
             }
             sleep(200);

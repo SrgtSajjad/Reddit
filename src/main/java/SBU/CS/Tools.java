@@ -52,11 +52,11 @@ public class Tools {
                 if (number >= firstValue && number <= lastValue) {
                     validInput = true;
                 } else {
-                    System.out.println("Invalid input: Please enter a valid number");
+                    System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                 }
             } catch (NumberFormatException e) {
                 // Handle the case where input is not a valid number
-                System.out.println("Invalid input: Please enter a valid integer.");
+                System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid integer.");
             }
         }
 

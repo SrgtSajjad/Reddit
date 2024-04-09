@@ -93,7 +93,7 @@ public class Subreddit implements Serializable {
                     if (creator == user)
                         editSubreddit();
                     else
-                        System.out.println("Invalid input: Please enter a valid number");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                     break;
 
             }

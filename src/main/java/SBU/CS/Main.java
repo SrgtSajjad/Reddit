@@ -54,7 +54,7 @@ public class Main {
         }
 
         if (logger == null) {
-            System.out.println("Invalid input: User with this username/email was not found, please check your credentials and try again");
+            System.out.println("\u001B[31m Invalid input \u001B[0m: User with this username/email was not found, please check your credentials and try again");
             return;
         }
 
@@ -66,7 +66,7 @@ public class Main {
                 break;
             } else if (Objects.equals(password, "exit"))
                 return;
-            System.out.println("Invalid input: Authentication failed,Please re-enter your password\nType \"exit\" to leave to menu");
+            System.out.println("\u001B[31m Invalid input \u001B[0m: Authentication failed,Please re-enter your password\nType \"exit\" to leave to menu");
 
         }
 
@@ -90,13 +90,13 @@ public class Main {
                 return;
             }
             if (!Tools.stringIsValid(username)) {
-                System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
+                System.out.println("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                 accountableUsername = false;
             }
             for (User user : Database.users) {
                 if (Objects.equals(username, user.getUsername())) {
                     accountableUsername = false;
-                    System.out.println("Invalid input: There is an account with this username, please try again\n(Type \"exit\" to exit to the Main Menu");
+                    System.out.println("\u001B[31m Invalid input \u001B[0m: There is an account with this username, please try again\n(Type \"exit\" to exit to the Main Menu");
                     break;
                 }
             }
@@ -113,13 +113,13 @@ public class Main {
                 return;
             }
             if (!Tools.validateEmailFormat(email)) {
-                System.out.println("Invalid input: Entered email format is incorrect");
+                System.out.println("\u001B[31m Invalid input \u001B[0m: Entered email format is incorrect");
                 accountableEmail = false;
             }
             for (User user : Database.users) {
                 if (Objects.equals(email, user.getEmail())) {
                     accountableEmail = false;
-                    System.out.println("Invalid input: There is an account with this email, please try again\n(Type \"exit\" to exit to the Main Menu");
+                    System.out.println("\u001B[31m Invalid input \u001B[0m: There is an account with this email, please try again\n(Type \"exit\" to exit to the Main Menu");
                     break;
                 }
             }
@@ -135,7 +135,7 @@ public class Main {
             if (Tools.stringIsValid(password))
                 break;
             else
-                System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
+                System.out.println("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
         }
 
 
@@ -153,7 +153,7 @@ public class Main {
             lastName = scanner.nextLine();
             if (Pattern.matches(regex, lastName))
                 break;
-            System.out.print("Invalid input: Entered string should be at least 2 character and only contain alphabets");
+            System.out.print("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 2 character and only contain alphabets");
         }
         LocalDate birthday;
         while (true) {

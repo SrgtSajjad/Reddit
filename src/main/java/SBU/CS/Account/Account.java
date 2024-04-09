@@ -88,7 +88,7 @@ public class Account implements AccountManagement, Serializable {
             System.out.println("Birthday changed successfully");
         }
         else
-            System.out.println("Invalid input: Entered date is not available");
+            System.out.println("\u001B[31m Invalid input \u001B[0m: Entered date is not available");
 
     }
 

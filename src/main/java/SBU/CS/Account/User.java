@@ -169,7 +169,7 @@ public class User extends Account {
                     if (Tools.stringIsValid(input))
                         changeUsername(input);
                     else
-                        System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                     break;
                 case 2:
                     System.out.print("New Password: ");
@@ -177,7 +177,7 @@ public class User extends Account {
                     if (Tools.stringIsValid(input))
                         changePassword(input);
                     else
-                        System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                     break;
                 case 3:
                     System.out.print("New Email: ");
@@ -185,7 +185,7 @@ public class User extends Account {
                     if (Tools.validateEmailFormat(input))
                         changeEmail(input);
                     else
-                        System.out.println("Invalid input: Entered email format is incorrect");
+                        System.out.println("\u001B[31m Invalid input \u001B[0m: Entered email format is incorrect");
                     break;
                 case 4:
                     System.out.print("New First Name: ");
@@ -193,7 +193,7 @@ public class User extends Account {
                     if (Pattern.matches(regex, input))
                         changeFirstName(input);
                     else
-                        System.out.print("Invalid input: Entered string should be at least 1 character and only contain alphabets");
+                        System.out.print("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 1 character and only contain alphabets");
                     break;
                 case 5:
                     System.out.print("New Last Name: ");
@@ -201,7 +201,7 @@ public class User extends Account {
                     if (Pattern.matches(regex, input))
                         changeLastName(input);
                     else
-                        System.out.print("Invalid input: Entered string should be at least 1 character and only contain alphabets");
+                        System.out.print("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 1 character and only contain alphabets");
                     break;
                 case 6:
                     changeBirthday(Tools.getBirthday());
@@ -257,7 +257,7 @@ public class User extends Account {
         System.out.print("Title: ");
         String title = scanner.nextLine();
         if (!Pattern.matches(regex, title)) {
-            System.out.println("Invalid input: subreddit title should only contain alphabets and be more than 2 letters long");
+            System.out.println("\u001B[31m Invalid input \u001B[0m: subreddit title should only contain alphabets and be more than 2 letters long");
             return;
         }
 
@@ -360,7 +360,7 @@ public class User extends Account {
             if (Pattern.matches(pattern, searchPrompt) || searchPrompt.equals("exit"))
                 return searchPrompt;
 
-            System.out.print("Invalid input: Entered string should have at least 1 characters and only contain alphabets, numbers, underscores and \"u/\" or \"r/\"");
+            System.out.print("\u001B[31m Invalid input \u001B[0m: Entered string should have at least 1 characters and only contain alphabets, numbers, underscores and \"u/\" or \"r/\"");
         }
     }
 
