@@ -7,20 +7,21 @@ import SBU.CS.Subreddit.Post;
 import SBU.CS.Subreddit.Subreddit;
 import SBU.CS.Tools;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Pattern;
 
 import static java.lang.Thread.sleep;
 
 public class User extends Account {
-    private ArrayList<Post> posts = new ArrayList<>(); // posts published by user
-    private ArrayList<Comment> comments = new ArrayList<>(); // replies written by user
-    private ArrayList<Post> upVotedPosts = new ArrayList<>(); // posts the user has upvoted
-    private ArrayList<Comment> upVotedComments = new ArrayList<>(); // comments the user has upvoted
-    private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
-    private ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
+    private transient ArrayList<Post> posts = new ArrayList<>(); // posts published by user
+    private transient ArrayList<Comment> comments = new ArrayList<>(); // replies written by user
+    private transient ArrayList<Post> upVotedPosts = new ArrayList<>(); // posts the user has upvoted
+    private transient ArrayList<Comment> upVotedComments = new ArrayList<>(); // comments the user has upvoted
+    private transient ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
+    private transient ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
 
-    public User(String username, String password, String firstName, String lastName, Birthday birthday, String email) {
+    public User(String username, String password, String firstName, String lastName, LocalDate birthday, String email) {
         super(username, password, firstName, lastName, birthday, email);
     }
 
@@ -142,7 +143,7 @@ public class User extends Account {
             System.out.println("Email: " + getEmail());
             System.out.println("First Name: " + getFirstName());
             System.out.println("Last Name: " + getLastName());
-            System.out.printf("Birthday: %d/%d/%d - Age: ", getBirthday().getYear(), getBirthday().getMonth(), getBirthday().getDay(), getAge());
+            System.out.printf("Birthday: %d/%d/%d - Age: ", getBirthday().getYear(), getBirthday().getMonthValue(), getBirthday().getDayOfMonth(), getAge());
 
             System.out.println("""
 
@@ -202,7 +203,7 @@ public class User extends Account {
                         System.out.print("Invalid input: Entered string should be at least 1 character and only contain alphabets");
                     break;
                 case 6:
-                    changeBirthday(Birthday.getBirthday());
+                    changeBirthday(Tools.getBirthday());
                     break;
             }
             sleep(200);

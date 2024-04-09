@@ -1,8 +1,8 @@
 package SBU.CS;
 
-import SBU.CS.Account.Birthday;
 import SBU.CS.Account.User;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -142,10 +142,10 @@ public class Main {
                 break;
             System.out.print("Invalid input: Entered string should be at least 2 character and only contain alphabets");
         }
-        Birthday birthday;
+        LocalDate birthday;
         while (true) {
-            birthday = Birthday.getBirthday();
-            if (Birthday.validateBirthday(birthday.getYear(), birthday.getMonth(), birthday.getDay()))
+            birthday = Tools.getBirthday();
+            if (Tools.validateBirthday(birthday.getYear(), birthday.getMonthValue(), birthday.getDayOfMonth()))
                 break;
 
         }

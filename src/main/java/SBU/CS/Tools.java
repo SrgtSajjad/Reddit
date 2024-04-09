@@ -1,5 +1,6 @@
 package SBU.CS;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -95,5 +96,43 @@ public class Tools {
         }
 
         return timePassed;
+    }
+
+    public static boolean validateBirthday(int year, int month, int day) { // checks if  a date is available
+        boolean isLeapYear = year % 4 == 0;
+        if (day <= 0)
+            return false;
+
+        switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12:
+                if (day > 31)
+                    return false;
+                break;
+            case 2:
+                if (isLeapYear && day > 29)
+                    return false;
+                else if (day > 28)
+                    return false;
+                break;
+            case 4, 6, 9, 11:
+                if (day > 30)
+                    return false;
+                break;
+            default:
+                return false;
+        }
+
+        return true;
+    }
+
+    public static LocalDate getBirthday() { // gets birthday from user
+        int year, month, day;
+
+        year = handleErrors("a year", 1900, 2024);
+        month = handleErrors("a month", 1, 12);
+        day = handleErrors("a day", 1, 31);
+
+
+        return LocalDate.of(year, month, day);
     }
 }

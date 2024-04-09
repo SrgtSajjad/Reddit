@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="all user methods implemented">
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="implement a method to view notifications">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/Birthday.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +22,23 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Reddit" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -82,7 +98,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Gradle.Reddit [:Main.main()].executor": "Run",
+    "Gradle.Reddit [:Main.main()].executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "develop",
@@ -443,7 +459,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712338826381</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="implement login and sign up methods in Main.java">
+      <option name="closed" value="true" />
+      <created>1712353241749</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1712353241749</updated>
+    </task>
+    <task id="LOCAL-00044" summary="implement a method to view notifications">
+      <option name="closed" value="true" />
+      <created>1712354040134</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1712354040134</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -464,8 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated Birthday.getBirthday" />
-    <MESSAGE value="updated Post.java" />
     <MESSAGE value="create display methods for Comment and Post class" />
     <MESSAGE value="Update Tools.handleErrors" />
     <MESSAGE value="update encapsulation of Post and Comment classes" />
@@ -489,7 +519,9 @@
     <MESSAGE value="added User.searchDatabase" />
     <MESSAGE value="edited Tools.stringIsValid" />
     <MESSAGE value="all user methods implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="all user methods implemented" />
+    <MESSAGE value="implement login and sign up methods in Main.java" />
+    <MESSAGE value="implement a method to view notifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement a method to view notifications" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -563,6 +595,18 @@
     {
       "branch": "develop",
       "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
     }
   ],
   "lastFilter": {
@@ -570,20 +614,4 @@
     "currentBranchFilter": true
   }
 }]]></component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>

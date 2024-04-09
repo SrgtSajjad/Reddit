@@ -1,21 +1,24 @@
 package SBU.CS.Account;
 
-import org.apache.commons.codec.digest.DigestUtils; // for hashing passwords
+import SBU.CS.Tools;
+import org.apache.commons.codec.digest.DigestUtils;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Account implements AccountManagement {
+public class Account implements AccountManagement, Serializable {
     private String username;
     private String password;
     private String email;
     private final UUID accountID;
     private String firstName;
     private String lastName;
-    private Birthday birthday;
+    private LocalDate birthday;
     private LocalDateTime timeCreated;
-    public Account(String username, String password, String firstName, String lastName, Birthday birthday, String email) {
+    public Account(String username, String password, String firstName, String lastName, LocalDate birthday, String email) {
         this.username = username;
         this.email = email;
         this.password = DigestUtils.sha256Hex(password);
@@ -74,13 +77,13 @@ public class Account implements AccountManagement {
 
     }
 
-    public Birthday getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
     @Override
-    public void changeBirthday(Birthday newBirthday) {
-        if (Birthday.validateBirthday(newBirthday.getYear(), newBirthday.getMonth(), newBirthday.getDay())) {
+    public void changeBirthday(LocalDate newBirthday) {
+        if (Tools.validateBirthday(newBirthday.getYear(), newBirthday.getMonthValue(), newBirthday.getDayOfMonth())) {
             this.birthday = newBirthday;
             System.out.println("Birthday changed successfully");
         }
