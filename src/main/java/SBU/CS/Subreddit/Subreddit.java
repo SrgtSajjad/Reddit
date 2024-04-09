@@ -153,7 +153,7 @@ public class Subreddit implements Serializable {
                     break;
                 case 1:
                     i = 0;
-                    for (User user: admins) {
+                    for (User user : admins) {
                         i++;
                         System.out.println(i + ". " + user.getUsername());
                     }
@@ -161,7 +161,7 @@ public class Subreddit implements Serializable {
                 case 2:
                     System.out.println("0. Exit");
                     i = 0;
-                    for (User user: admins) {
+                    for (User user : admins) {
                         i++;
                         System.out.println(i + ". " + user.getUsername());
                     }
@@ -179,7 +179,7 @@ public class Subreddit implements Serializable {
                 case 3:
                     System.out.println("0. Exit");
                     i = 0;
-                    for (User user: members) {
+                    for (User user : members) {
                         i++;
                         System.out.println(i + ". " + user.getUsername());
                     }

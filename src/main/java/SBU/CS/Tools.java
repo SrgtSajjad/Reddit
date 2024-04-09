@@ -23,17 +23,15 @@ public class Tools {
         // Regex to match at least 8 characters, containing only alphabets, numbers, and underscores
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(enteredString);
-        boolean valid = matcher.find();
-        if (!valid)
-            System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
 
-        return valid;
+
+        return matcher.find();
 
 
     }
 
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println();
         }
     }
@@ -45,7 +43,7 @@ public class Tools {
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.printf("Enter %s (from %d to %d): ", inputTitle, firstValue, lastValue);
+            System.out.printf("\n%sEnter %s (from %d to %d): %s", YELLOW_COLOR, inputTitle, firstValue, lastValue, RESET_COLOR);
             String input = scanner.nextLine();
 
             try {
@@ -66,15 +64,12 @@ public class Tools {
     }
 
     public static boolean validateEmailFormat(String email) { // validates an entered email's format using regex
-        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        String regex = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
 
-        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-        boolean valid = matcher.find();
-        if (!valid)
-            System.out.println("Invalid input: Entered email format is incorrect");
 
-        return valid;
+        return matcher.find();
     }
 
     public static String calculateTimePassed(LocalDateTime timePublished) { //TODO bug
@@ -128,9 +123,9 @@ public class Tools {
     public static LocalDate getBirthday() { // gets birthday from user
         int year, month, day;
 
-        year = handleErrors("a year", 1900, 2024);
-        month = handleErrors("a month", 1, 12);
-        day = handleErrors("a day", 1, 31);
+        year = handleErrors("your birth year", 1900, 2024);
+        month = handleErrors("your birth month", 1, 12);
+        day = handleErrors("your birth day", 1, 31);
 
 
         return LocalDate.of(year, month, day);

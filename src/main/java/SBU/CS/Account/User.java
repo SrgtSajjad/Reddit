@@ -21,6 +21,7 @@ public class User extends Account {
     private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
     private ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
     private ArrayList<Post> savedPosts = new ArrayList<>();
+
     public User(String username, String password, String firstName, String lastName, LocalDate birthday, String email) {
         super(username, password, firstName, lastName, birthday, email);
     }
@@ -81,7 +82,7 @@ public class User extends Account {
         boolean flag = true;
         while (flag) {
             Tools.clearScreen();
-            System.out.println("~~| My Profile |~~");
+            System.out.println(Tools.BLUE_COLOR + "~~| My Profile |~~" + Tools.RESET_COLOR);
             System.out.println("### " + getUsername());
             System.out.printf("u/%s - %d karma - %s %d, %d\n", getUsername(), getTotalKarma(), getTimeCreated().getMonth(), getTimeCreated().getDayOfMonth(), getTimeCreated().getYear());
 
@@ -138,7 +139,7 @@ public class User extends Account {
         Scanner scanner = new Scanner(System.in);
         while (flag) {
             Tools.clearScreen();
-            System.out.println("~~| Edit Profile |~~");
+            System.out.println(Tools.BLUE_COLOR + "~~| Edit Profile |~~" + Tools.RESET_COLOR);
             System.out.println("Username: " + getUsername());
             System.out.println("Email: " + getEmail());
             System.out.println("First Name: " + getFirstName());
@@ -167,18 +168,24 @@ public class User extends Account {
                     input = scanner.nextLine();
                     if (Tools.stringIsValid(input))
                         changeUsername(input);
+                    else
+                        System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                     break;
                 case 2:
                     System.out.print("New Password: ");
                     input = scanner.nextLine();
                     if (Tools.stringIsValid(input))
                         changePassword(input);
+                    else
+                        System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                     break;
                 case 3:
                     System.out.print("New Email: ");
                     input = scanner.nextLine();
                     if (Tools.validateEmailFormat(input))
                         changeEmail(input);
+                    else
+                        System.out.println("Invalid input: Entered email format is incorrect");
                     break;
                 case 4:
                     System.out.print("New First Name: ");
@@ -206,13 +213,16 @@ public class User extends Account {
 
     private void createPost() { // creates a post with the user as publisher
         Tools.clearScreen();
-        System.out.println("~~| Create Post |~~");
+        System.out.println(Tools.BLUE_COLOR + "~~| Create Post |~~" + Tools.RESET_COLOR);
         Scanner scanner = new Scanner(System.in);
         int i = 0;
         System.out.print("0. Cancel");
         for (Subreddit subreddit : joinedSubreddits) {
             i++;
             System.out.printf("\n%d. r/%s : %d members", i, subreddit.getTitle(), subreddit.getMembers().size());
+        }
+        if (joinedSubreddits.isEmpty()) {
+            System.out.println("You haven't joined any subreddits, Please do so before trying to create a post!");
         }
         int number = Tools.handleErrors("a subreddit", 0, joinedSubreddits.size());
         if (number == 0) {
@@ -224,6 +234,7 @@ public class User extends Account {
         System.out.print("Text: ");
         String text = scanner.nextLine();
 
+        ArrayList<String> tags = Post.inputTags();
         System.out.println("Confirm creation of post: " +
                 "\nTitle: " + title +
                 "\nText: " + text +
@@ -231,7 +242,7 @@ public class User extends Account {
                 "\n1. Yes" +
                 "\n2. No");
         if (Tools.handleErrors("an option", 1, 2) == 1) {
-            Post post = new Post(title, text, subreddit, this, Post.inputTags());
+            Post post = new Post(title, text, subreddit, this, tags);
             posts.addFirst(post);
             System.out.print("Post created successfully");
         }
@@ -239,13 +250,13 @@ public class User extends Account {
 
     private void createSubreddit() { // allows user to create a custom subreddit
         Tools.clearScreen();
-        System.out.println("~~| Create Subreddit |~~");
+        System.out.println(Tools.BLUE_COLOR + "~~| Create Subreddit |~~" + Tools.RESET_COLOR);
         Scanner scanner = new Scanner(System.in);
         String regex = "^[a-zA-Z]{2,}$";
 
         System.out.print("Title: ");
         String title = scanner.nextLine();
-        if (Pattern.matches(regex, title)) {
+        if (!Pattern.matches(regex, title)) {
             System.out.println("Invalid input: subreddit title should only contain alphabets and be more than 2 letters long");
             return;
         }
@@ -273,6 +284,8 @@ public class User extends Account {
     }
 
     private void displayTimeline() throws InterruptedException { // displays user's timeline from followed subreddits
+        Tools.clearScreen();
+        System.out.println(Tools.BLUE_COLOR + "~~| Timeline |~~" + Tools.RESET_COLOR);
         ArrayList<Post> timeline = new ArrayList<>();
         for (Subreddit subreddit : joinedSubreddits) {
             timeline.addAll(subreddit.getPosts());
@@ -304,7 +317,7 @@ public class User extends Account {
         int i;
         while (true) {
             Tools.clearScreen();
-            System.out.println("~~| Communities |~~");
+            System.out.println(Tools.BLUE_COLOR + "~~| Communities |~~" + Tools.RESET_COLOR);
             i = 0;
             System.out.println("0. Exit");
             for (Subreddit subreddit : joinedSubreddits) {
@@ -325,7 +338,8 @@ public class User extends Account {
 
         while (true) {
             Tools.clearScreen();
-            System.out.println("~~| Search |~~");
+            System.out.println(Tools.BLUE_COLOR + "~~| Search |~~" + Tools.RESET_COLOR);
+
             searchPrompt = getSearchPrompt();
             if (searchPrompt.equals("exit"))
                 return;
@@ -413,10 +427,11 @@ public class User extends Account {
 
     private void displayInbox() {
         Tools.clearScreen();
-        System.out.println("~~| Inbox |~~");
+        System.out.println(Tools.BLUE_COLOR + "~~| Inbox |~~" + Tools.RESET_COLOR);
+
         Scanner scanner = new Scanner(System.in);
         int i = 0;
-        for (Notification notification: notifications) {
+        for (Notification notification : notifications) {
             i++;
             System.out.printf("%d. Title: %s , Details: %s\n", i, notification.getTitle(), notification.getText());
         }
@@ -429,12 +444,12 @@ public class User extends Account {
         while (flag) {
             Tools.clearScreen();
             System.out.println("""
-                    ~~| Your Panel |~~
+                    \u001B[34m~~| Your Panel |~~\u001B[0m
                                         
                     0. Logout
                     1. My Profile
                     2. Create a Post
-                    3. Create a Community
+                    3. Create a Subreddit
                     4. Timeline
                     5. Communities
                     6. Search

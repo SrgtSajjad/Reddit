@@ -14,7 +14,6 @@ public class Post extends Comment {
 
     private String title;
     private ArrayList<String> flairTags = new ArrayList<>();
-    private ArrayList<Comment> comments = new ArrayList<>();
 
 
     public Post(String title, String text, Subreddit subreddit, User publisher, ArrayList<String> flairTags) {
@@ -59,7 +58,7 @@ public class Post extends Comment {
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
+            System.out.println("\n0. Exit\n1. " + Tools.RED_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.PURPLE_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
@@ -96,23 +95,23 @@ public class Post extends Comment {
                         System.out.println("You have been banned from this subreddit and you can't post or comment in it");
                     } else {
                         System.out.println("Enter your comment:");
-                        comments.add(new Comment(scanner.nextLine(), user, getSubreddit(), this));
+                        getComments().add(new Comment(scanner.nextLine(), user, getSubreddit(), this));
                     }
                     break;
                 case 4: // view other comments
                     System.out.println("\n0. Exit");
                     int i = 0;
-                    for (Comment comment : comments) {
+                    for (Comment comment : getComments()) {
                         i++;
                         System.out.println(i + ". ");
                         comment.displayBrief();
                     }
 
-                    command = Tools.handleErrors("an option", 0, comments.size());
+                    command = Tools.handleErrors("an option", 0, getComments().size());
                     if (command == 0) {
                         return;
                     } else {
-                        comments.get(command - 1).viewUserActions(user);
+                        getComments().get(command - 1).viewUserActions(user);
                     }
                     break;
                 case 5: // edit post if it belongs to the user
@@ -175,17 +174,19 @@ public class Post extends Comment {
         int command;
         Scanner scanner = new Scanner(System.in);
         while (flag) {
-            System.out.println("Editing post: \n0. Cancel\n1. Edit Title\n2. Edit Text\n3. Edit Flair/Tags");
-            command = Tools.handleErrors("an option", 0, 3);
+            System.out.println("Editing post: \n0. Cancel\n1. Edit Title\n2. Edit Text\n3. Edit Flair/Tags\n4. Delete Post");
+            command = Tools.handleErrors("an option", 0, 4);
             switch (command) {
                 case 0:
                     flag = false;
                     break;
                 case 1:
+                    System.out.print("New Title: ");
                     setTitle(scanner.nextLine());
                     System.out.println("Title edited successfully");
                     break;
                 case 2:
+                    System.out.print("New Text: ");
                     setText(scanner.nextLine());
                     System.out.println("Text edited successfully");
                     break;
@@ -193,6 +194,16 @@ public class Post extends Comment {
                     this.flairTags = inputTags();
                     System.out.println("Tags edited successfully");
                     break;
+                case 4:
+                    System.out.printf("Confirm delete of the post: \"%s\"\n1. No\n2. Yes\n", title);
+                    command = Tools.handleErrors("an option", 1, 2);
+                    if (command == 2) {
+                        getSubreddit().getPosts().remove(this);
+                        this.getPublisher().getPosts().remove(this);
+                        System.out.println("Post deleted successfully");
+                    }
+                    break;
+
             }
             sleep(200);
         }
@@ -203,10 +214,16 @@ public class Post extends Comment {
         Scanner scanner = new Scanner(System.in);
         System.out.println("type \"exit\" when you are done adding tags");
         int i = 0;
-        while (!Objects.equals(scanner.nextLine(), "exit")) {
+        boolean flag = true;
+        while (flag) {
             i++;
             System.out.print(i + ". ");
-            tags.add(scanner.nextLine());
+            String input = scanner.nextLine();
+            if (Objects.equals(input, "exit"))
+                break;
+            else
+                tags.add(input);
+
         }
         return tags;
     }

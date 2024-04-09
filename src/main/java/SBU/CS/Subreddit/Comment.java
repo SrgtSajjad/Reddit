@@ -20,7 +20,10 @@ public class Comment implements Serializable {
     private Subreddit subreddit;
     ArrayList<User> upVoters = new ArrayList<>();
     ArrayList<User> downVoters = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
+
     private UUID ID;
+
     public Comment(String text, User publisher, Subreddit subreddit, Post post) {
         this.subreddit = subreddit;
         this.text = text;
@@ -51,19 +54,19 @@ public class Comment implements Serializable {
 
         boolean hasUpVoted, hasDownVoted;
         int command;
-
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             Tools.clearScreen();
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + (hasUpVoted ? "Retract Vote" : "Upvote") + "\n2. " + (hasDownVoted ? "Retract Vote" : "Down vote") + (user.getComments().contains(this) ? "\n3. Edit Comment" : "") + (getSubreddit().getAdmins().contains(user) ? "\n4. Admin Actions" : ""));
+            System.out.println("\n0. Exit\n1. " + Tools.RED_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.PURPLE_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Reply\n4. View Replies" + (getPublisher() == user ? "\n5. Edit Comment" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, (subreddit.getAdmins().contains(user) ? 4 : (user == publisher ? 3 : 2)));
+            command = Tools.handleErrors("an option", 0, (subreddit.getAdmins().contains(user) ? 6 : (user == publisher ? 5 : 4)));
             switch (command) {
                 case 0:
                     return;
@@ -89,13 +92,39 @@ public class Comment implements Serializable {
                         System.out.println("Down-voted successfully");
                     }
                     break;
-                case 3: // edit post if it belongs to the user
+
+                case 3:
+                    if (getSubreddit().getBannedUsers().contains(user)) {
+                        System.out.println("You have been banned from this subreddit and you can't post or comment in it");
+                    } else {
+                        System.out.println("Enter your comment:");
+                        getComments().add(new Comment(scanner.nextLine(), user, getSubreddit(), (Post) this));
+                    }
+                    break;
+                case 4:
+                    System.out.println("\n0. Exit");
+                    int i = 0;
+                    for (Comment comment : getComments()) {
+                        i++;
+                        System.out.println(i + ". ");
+                        comment.displayBrief();
+                    }
+
+                    command = Tools.handleErrors("an option", 0, getComments().size());
+                    if (command == 0) {
+                        return;
+                    } else {
+                        getComments().get(command - 1).viewUserActions(user);
+                    }
+                    break;
+
+                case 5: // edit post if it belongs to the user
                     if (getPublisher() == user)
                         edit();
                     else
                         System.out.println("Invalid input: Please enter a valid number");
                     break;
-                case 4: // open admin actions if user is an admin
+                case 6: // open admin actions if user is an admin
                     if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
                         System.out.println("Publisher of this comment is an admin, admin actions is not available for this comment");
                     } else if (getSubreddit().getAdmins().contains(user))
@@ -122,7 +151,7 @@ public class Comment implements Serializable {
                 if (command == 2) {
                     getSubreddit().getPosts().remove(this);
                     getPublisher().getNotifications().addFirst(new Notification("Comment Deletion", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was deleted by an admin"));
-                    System.out.println("Post deleted successfully");
+                    System.out.println("Comment deleted successfully");
                 }
                 break;
             case 2:
@@ -131,7 +160,7 @@ public class Comment implements Serializable {
                 if (command == 2) {
                     getSubreddit().getBannedUsers().add(getPublisher());
                     getSubreddit().getAdmins().remove(getPublisher());
-                    getSubreddit().getPosts().remove(this);
+                    post.getComments().remove(this);
                     getPublisher().getNotifications().addFirst(new Notification("Banned from subreddit", "Due to your comment in the subreddit: " + getSubreddit().getTitle() + " for the post with title: " + post.getTitle() + ", you have been banned from this subreddit"));
                     System.out.println("User banned and post deleted successfully");
                 }
@@ -145,15 +174,25 @@ public class Comment implements Serializable {
         int command;
         Scanner scanner = new Scanner(System.in);
         while (flag) {
-            System.out.println("Editing comment: \n0. Cancel \n1. Edit Text");
+            System.out.println("Editing comment: \n0. Cancel \n1. Edit Text\n2. Delete Comment");
             command = Tools.handleErrors("an option", 0, 2);
             switch (command) {
                 case 0:
                     flag = false;
                     break;
                 case 1:
+                    System.out.print("New Text: ");
                     setText(scanner.nextLine());
                     System.out.println("Text edited successfully");
+                    break;
+                case 2:
+                    System.out.printf("Confirm delete of the comment: \"%s\"\n1. No\n2. Yes\n", text);
+                    command = Tools.handleErrors("an option", 1, 2);
+                    if (command == 2) {
+                        post.getComments().remove(this);
+                        this.getPublisher().getComments().remove(this);
+                        System.out.println("Comment deleted successfully");
+                    }
                     break;
             }
         }
@@ -177,5 +216,9 @@ public class Comment implements Serializable {
 
     public Subreddit getSubreddit() {
         return subreddit;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 }

@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="Refactor Birthday.java and add read from file and write to file methods to Database.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="file reading and writing methods completed">
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Notification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" afterDir="false" />
@@ -490,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712683136170</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="file reading and writing methods completed">
+      <option name="closed" value="true" />
+      <created>1712695486609</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1712695486609</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,7 +516,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update Tools.handleErrors" />
     <MESSAGE value="update encapsulation of Post and Comment classes" />
     <MESSAGE value="update Comment.displayComplete and Post.displayComplete" />
     <MESSAGE value="Notification class created" />
@@ -536,7 +540,8 @@
     <MESSAGE value="implement login and sign up methods in Main.java" />
     <MESSAGE value="implement a method to view notifications" />
     <MESSAGE value="Refactor Birthday.java and add read from file and write to file methods to Database.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Birthday.java and add read from file and write to file methods to Database.java" />
+    <MESSAGE value="file reading and writing methods completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="file reading and writing methods completed" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -581,6 +586,10 @@
       "currentBranchFilter": true
     },
     {
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
       "currentBranchFilter": true
     },
     {

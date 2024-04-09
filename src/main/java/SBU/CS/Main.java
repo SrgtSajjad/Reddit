@@ -13,7 +13,7 @@ public class Main {
         Database.deserializeClasses();
         while (flag) {
             Tools.clearScreen();
-            System.out.println("~~| Reddit |~~");
+            System.out.println(Tools.RED_COLOR + "~~| Reddit |~~"+ Tools.RESET_COLOR);
             System.out.println("0. Exit\n1. Login\n2. Sign Up");
             Scanner scanner = new Scanner(System.in);
             int command = Tools.handleErrors("an option", 0, 2);
@@ -31,17 +31,12 @@ public class Main {
         }
         Database.serializeClasses();
 
-//        User user = new User("sajjad", "1234", "fi", "la", LocalDate.of(2005,8,11), "gmail.com");
-//        user.getNotifications().add(new Notification("test title", "test1"));
-//        user.getNotifications().add(new Notification("test title2", "test2"));
-//        Database.users.add(user);
-//        Database.serializeClasses();
-//        Database.deserializeClasses();
 
     }
 
     public static void login() throws InterruptedException {
-        System.out.println("~~| Login |~~");
+        Tools.clearScreen();
+        System.out.println(Tools.BLUE_COLOR + "~~| Login |~~" + Tools.RESET_COLOR);
         Scanner scanner = new Scanner(System.in);
         String input;
         User logger = null;
@@ -78,11 +73,11 @@ public class Main {
         logger.displayUserPanel();
 
 
-
     }
 
     public static void signUp() throws InterruptedException {
-        System.out.println("~~| Sign Up |~~");
+        Tools.clearScreen();
+        System.out.println(Tools.BLUE_COLOR + "~~| Sign Up |~~" + Tools.RESET_COLOR);
         String username, email;
         Scanner scanner = new Scanner(System.in);
         boolean accountableUsername = true, accountableEmail = true;
@@ -95,6 +90,7 @@ public class Main {
                 return;
             }
             if (!Tools.stringIsValid(username)) {
+                System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
                 accountableUsername = false;
             }
             for (User user : Database.users) {
@@ -117,6 +113,7 @@ public class Main {
                 return;
             }
             if (!Tools.validateEmailFormat(email)) {
+                System.out.println("Invalid input: Entered email format is incorrect");
                 accountableEmail = false;
             }
             for (User user : Database.users) {
@@ -137,6 +134,8 @@ public class Main {
             password = scanner.nextLine();
             if (Tools.stringIsValid(password))
                 break;
+            else
+                System.out.println("Invalid input: Entered string should be at least 8 characters and only contain alphabets, numbers and underscores");
         }
 
 
