@@ -1,6 +1,8 @@
 package SBU.CS;
 
-public class Notification {
+import java.io.Serializable;
+
+public class Notification implements Serializable {
 
     private String title;
     private String text;

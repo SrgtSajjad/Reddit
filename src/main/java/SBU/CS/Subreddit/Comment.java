@@ -4,6 +4,7 @@ import SBU.CS.Account.User;
 import SBU.CS.Notification;
 import SBU.CS.Tools;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 import static java.lang.Thread.sleep;
 
-public class Comment {
+public class Comment implements Serializable {
     private Post post;
     private String text;
     private User publisher;

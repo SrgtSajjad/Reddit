@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 import static java.lang.Thread.sleep;
 
 public class User extends Account {
-    private transient ArrayList<Post> posts = new ArrayList<>(); // posts published by user
-    private transient ArrayList<Comment> comments = new ArrayList<>(); // replies written by user
-    private transient ArrayList<Post> upVotedPosts = new ArrayList<>(); // posts the user has upvoted
-    private transient ArrayList<Comment> upVotedComments = new ArrayList<>(); // comments the user has upvoted
-    private transient ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
-    private transient ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
-
+    private ArrayList<Post> posts = new ArrayList<>(); // posts published by user
+    private ArrayList<Comment> comments = new ArrayList<>(); // replies written by user
+    private ArrayList<Post> upVotedPosts = new ArrayList<>(); // posts the user has upvoted
+    private ArrayList<Comment> upVotedComments = new ArrayList<>(); // comments the user has upvoted
+    private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
+    private ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
+    private ArrayList<Post> savedPosts = new ArrayList<>();
     public User(String username, String password, String firstName, String lastName, LocalDate birthday, String email) {
         super(username, password, firstName, lastName, birthday, email);
     }
@@ -88,12 +88,12 @@ public class User extends Account {
             System.out.println("""
                                         
                     0. Exit
-                    1. Edit
-                    2. Posts
-                    3. Comments
+                    1. Edit Profile
+                    2. My Posts
+                    3. My Comments
                     4. About
                     """);
-            int command = 0;
+            int command = Tools.handleErrors("an option", 0, 4);
             switch (command) {
                 case 0:
                     flag = false;
@@ -167,24 +167,18 @@ public class User extends Account {
                     input = scanner.nextLine();
                     if (Tools.stringIsValid(input))
                         changeUsername(input);
-                    else
-                        System.out.print("Invalid input: Do not use SPACES");
                     break;
                 case 2:
                     System.out.print("New Password: ");
                     input = scanner.nextLine();
                     if (Tools.stringIsValid(input))
                         changePassword(input);
-                    else
-                        System.out.print("Invalid input: Do not use SPACES");
                     break;
                 case 3:
                     System.out.print("New Email: ");
                     input = scanner.nextLine();
                     if (Tools.validateEmailFormat(input))
                         changeEmail(input);
-                    else
-                        System.out.print("Invalid input: Do not use SPACES");
                     break;
                 case 4:
                     System.out.print("New First Name: ");
@@ -211,12 +205,14 @@ public class User extends Account {
     }
 
     private void createPost() { // creates a post with the user as publisher
+        Tools.clearScreen();
+        System.out.println("~~| Create Post |~~");
         Scanner scanner = new Scanner(System.in);
         int i = 0;
         System.out.print("0. Cancel");
         for (Subreddit subreddit : joinedSubreddits) {
             i++;
-            System.out.printf("%d. r/%s : %d members", i, subreddit.getTitle(), subreddit.getMembers().size());
+            System.out.printf("\n%d. r/%s : %d members", i, subreddit.getTitle(), subreddit.getMembers().size());
         }
         int number = Tools.handleErrors("a subreddit", 0, joinedSubreddits.size());
         if (number == 0) {
@@ -230,8 +226,8 @@ public class User extends Account {
 
         System.out.println("Confirm creation of post: " +
                 "\nTitle: " + title +
-                "\nText" + text +
-                "\nSubreddit" + subreddit.getTitle() +
+                "\nText: " + text +
+                "\nSubreddit: " + subreddit.getTitle() +
                 "\n1. Yes" +
                 "\n2. No");
         if (Tools.handleErrors("an option", 1, 2) == 1) {
@@ -242,12 +238,17 @@ public class User extends Account {
     }
 
     private void createSubreddit() { // allows user to create a custom subreddit
+        Tools.clearScreen();
+        System.out.println("~~| Create Subreddit |~~");
         Scanner scanner = new Scanner(System.in);
+        String regex = "^[a-zA-Z]{2,}$";
 
         System.out.print("Title: ");
         String title = scanner.nextLine();
-        if (!Tools.stringIsValid(title))
+        if (Pattern.matches(regex, title)) {
+            System.out.println("Invalid input: subreddit title should only contain alphabets and be more than 2 letters long");
             return;
+        }
 
         for (Subreddit subreddit : Database.subreddits) {
             if (Objects.equals(subreddit.getTitle(), title)) {
@@ -260,7 +261,7 @@ public class User extends Account {
 
         System.out.println("Confirm creation of subreddit: " +
                 "\nTitle: " + title +
-                "\nExplanation" + explanation +
+                "\nExplanation: " + explanation +
                 "\n1. Yes" +
                 "\n2. No");
         if (Tools.handleErrors("an option", 1, 2) == 1) {
@@ -311,7 +312,7 @@ public class User extends Account {
                 System.out.println(i + ". " + (subreddit.getAdmins().contains(this) ? "(Admin)" : ""));
                 subreddit.displayBrief();
             }
-            int input = Tools.handleErrors("a post", 0, joinedSubreddits.size());
+            int input = Tools.handleErrors("a subreddit", 0, joinedSubreddits.size());
             if (input == 0) {
                 break;
             }
@@ -440,7 +441,7 @@ public class User extends Account {
                     7. Inbox""");
             // ToDo messaging and save posts and following users
             // ToDO allow user to see upvoted posts or comments
-            int command = Tools.handleErrors("an option", 0, 6);
+            int command = Tools.handleErrors("an option", 0, 7);
             switch (command) {
                 case 0:
                     flag = false;
@@ -462,8 +463,10 @@ public class User extends Account {
                     break;
                 case 6:
                     searchDatabase();
+                    break;
                 case 7:
                     displayInbox();
+                    break;
             }
         }
     }

@@ -4,6 +4,7 @@ import SBU.CS.Account.User;
 import SBU.CS.Database;
 import SBU.CS.Tools;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
-public class Subreddit {
+public class Subreddit implements Serializable {
     private String title;
     private User creator;
     private ArrayList<User> admins = new ArrayList<>();

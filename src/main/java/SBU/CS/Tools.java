@@ -77,7 +77,7 @@ public class Tools {
         return valid;
     }
 
-    public static String calculateTimePassed(LocalDateTime timePublished) {
+    public static String calculateTimePassed(LocalDateTime timePublished) { //TODO bug
         LocalDateTime currentTime = LocalDateTime.now();
         String timePassed;
 

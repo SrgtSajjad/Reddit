@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        while (true) {
+        boolean flag = true;
+        Database.deserializeClasses();
+        while (flag) {
             Tools.clearScreen();
             System.out.println("~~| Reddit |~~");
             System.out.println("0. Exit\n1. Login\n2. Sign Up");
@@ -17,7 +19,8 @@ public class Main {
             int command = Tools.handleErrors("an option", 0, 2);
             switch (command) {
                 case 0:
-                    return;
+                    flag = false;
+                    break;
                 case 1:
                     login();
                     break;
@@ -26,6 +29,15 @@ public class Main {
                     break;
             }
         }
+        Database.serializeClasses();
+
+//        User user = new User("sajjad", "1234", "fi", "la", LocalDate.of(2005,8,11), "gmail.com");
+//        user.getNotifications().add(new Notification("test title", "test1"));
+//        user.getNotifications().add(new Notification("test title2", "test2"));
+//        Database.users.add(user);
+//        Database.serializeClasses();
+//        Database.deserializeClasses();
+
     }
 
     public static void login() throws InterruptedException {
@@ -76,6 +88,7 @@ public class Main {
         boolean accountableUsername = true, accountableEmail = true;
 
         while (true) {
+            accountableUsername = true;
             System.out.print("Username: ");
             username = scanner.nextLine();
             if (Objects.equals(username, "exit")) {
@@ -97,6 +110,7 @@ public class Main {
 
 
         while (true) {
+            accountableEmail = true;
             System.out.print("Email: ");
             email = scanner.nextLine();
             if (Objects.equals(email, "exit")) {
