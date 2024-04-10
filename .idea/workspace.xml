@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="file reading and writing methods completed">
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="apply error colors">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Subreddit/Subreddit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,17 +94,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Reddit [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Reddit [:Main.main()].executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="SBU.CS.Tools" />
@@ -495,7 +494,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712695486609</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="allow replying to comments">
+      <option name="closed" value="true" />
+      <created>1712701164262</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1712701164262</updated>
+    </task>
+    <task id="LOCAL-00048" summary="apply error colors">
+      <option name="closed" value="true" />
+      <created>1712701548999</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1712701548999</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -516,8 +531,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update encapsulation of Post and Comment classes" />
-    <MESSAGE value="update Comment.displayComplete and Post.displayComplete" />
     <MESSAGE value="Notification class created" />
     <MESSAGE value="Display complete methods updated" />
     <MESSAGE value="getter and setters updated in User class" />
@@ -541,7 +554,9 @@
     <MESSAGE value="implement a method to view notifications" />
     <MESSAGE value="Refactor Birthday.java and add read from file and write to file methods to Database.java" />
     <MESSAGE value="file reading and writing methods completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="file reading and writing methods completed" />
+    <MESSAGE value="allow replying to comments" />
+    <MESSAGE value="apply error colors" />
+    <option name="LAST_COMMIT_MESSAGE" value="apply error colors" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -635,6 +650,10 @@
     {
       "branch": "develop",
       "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
     }
   ],
   "lastFilter": {
@@ -642,4 +661,20 @@
     "currentBranchFilter": true
   }
 }]]></component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/SBU/CS/Database.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="SBU.CS.Subreddit.Subreddit" memberName="admins" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
 </project>

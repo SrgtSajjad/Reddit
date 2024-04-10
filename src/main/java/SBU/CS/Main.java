@@ -153,7 +153,7 @@ public class Main {
             lastName = scanner.nextLine();
             if (Pattern.matches(regex, lastName))
                 break;
-            System.out.print("\u001B[31m Invalid input \u001B[0m: Entered string should be at least 2 character and only contain alphabets");
+            System.out.print("\u001B[31m Invalid input \u001B[0mEntered string should be at least 2 character and only contain alphabets");
         }
         LocalDate birthday;
         while (true) {

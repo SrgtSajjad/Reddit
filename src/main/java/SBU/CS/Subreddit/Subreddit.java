@@ -46,7 +46,6 @@ public class Subreddit implements Serializable {
 
     public void viewUserActions(User user) throws InterruptedException {
 
-        Scanner scanner = new Scanner(System.in);
         boolean hasJoined;
         int command, i;
 

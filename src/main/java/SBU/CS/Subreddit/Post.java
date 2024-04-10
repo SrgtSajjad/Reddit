@@ -26,7 +26,7 @@ public class Post extends Comment {
     @Override
     public void displayBrief() { // for displaying a short version of the post
         System.out.println("r/" + getSubreddit().getTitle() + " - " + Tools.calculateTimePassed(getTimePublished()));
-        System.out.println("### " + this.title);
+        System.out.println("Title: " + this.title);
 
         for (String tag : flairTags) {
             System.out.print("#" + tag + " ");
@@ -37,10 +37,10 @@ public class Post extends Comment {
 
     @Override
     public void displayComplete(User user) {
-        System.out.println("r/" + getPublisher().getUsername());
+        System.out.println("r/" + getSubreddit().getTitle());
         System.out.printf("u/%s - %d/%d/%d at %d:%d\n", getPublisher().getUsername(), getTimePublished().getYear(), getTimePublished().getMonthValue(), getTimePublished().getDayOfMonth(), getTimePublished().getHour(), getTimePublished().getMinute());
-        System.out.println("### " + this.title);
-        System.out.println("## " + this.getText());
+        System.out.println("Title: " + this.title);
+        System.out.println("Text: " + this.getText());
         for (String tag : flairTags) {
             System.out.print("#" + tag + " ");
         }
@@ -50,7 +50,7 @@ public class Post extends Comment {
     @Override
     public void viewUserActions(User user) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        boolean hasUpVoted, hasDownVoted;
+        boolean hasUpVoted, hasDownVoted, hasSaved;
         int command;
 
         while (true) {
@@ -58,13 +58,14 @@ public class Post extends Comment {
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + Tools.RED_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.PURPLE_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Comment\n4. View Comments" + (getPublisher() == user ? "\n5. Edit Post" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
+            hasSaved = user.getSavedPosts().contains(this);
+            System.out.println("\n0. Exit\n1. " + Tools.GREEN_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.RED_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Comment\n4. View Comments\n5. " + (hasSaved ? "Un-Save Post" : "Save Post") + (getPublisher() == user ? "\n6. Edit Post" : "") + (getSubreddit().getAdmins().contains(user) ? "\n7. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
                 System.out.println("(You have down-voted this comment)");
             }
-            command = Tools.handleErrors("an option", 0, (getSubreddit().getAdmins().contains(user) ? 6 : (user == getPublisher() ? 5 : 4)));
+            command = Tools.handleErrors("an option", 0, (getSubreddit().getAdmins().contains(user) ? 7 : (user == getPublisher() ? 6 : 5)));
             switch (command) {
                 case 0: // exit
                     return;
@@ -75,7 +76,8 @@ public class Post extends Comment {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.upVoters.add(user);
-                        user.getUpVotedPosts().add(this);
+                        this.downVoters.remove(user);
+                        user.getUpVotedPosts().addFirst(this);
                         getPublisher().getNotifications().addFirst(new Notification("Post up-voted", "Your post in the subreddit: " + getSubreddit().getTitle() + " with title: " + title + ", was up-voted"));
                         System.out.println("Up-voted successfully");
                     }
@@ -86,6 +88,7 @@ public class Post extends Comment {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.downVoters.add(user);
+                        this.upVoters.remove(user);
                         getPublisher().getNotifications().addFirst(new Notification("Post down-voted", "Your post in the subreddit: " + getSubreddit().getTitle() + " with title: " + title + ", was down-voted"));
                         System.out.println("Down-voted successfully");
                     }
@@ -114,13 +117,23 @@ public class Post extends Comment {
                         getComments().get(command - 1).viewUserActions(user);
                     }
                     break;
-                case 5: // edit post if it belongs to the user
+                case 5:
+                    if (hasSaved) {
+                        user.getSavedPosts().remove(this);
+                        System.out.println("Post un-saved successfully");
+                    }
+                    else {
+                        user.getSavedPosts().add(this);
+                        System.out.println("Post saved successfully");
+                    }
+                    break;
+                case 6: // edit post if it belongs to the user
                     if (getPublisher() == user)
                         edit();
                     else
                         System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                     break;
-                case 6: // open admin actions if user is an admin
+                case 7: // open admin actions if user is an admin
                     if (getSubreddit().getAdmins().contains(getPublisher()) && getSubreddit().getCreator() != user) {
                         System.out.println("Publisher of this post is an admin, admin actions is not available for this post");
                     } else if (getSubreddit().getAdmins().contains(user))
@@ -129,7 +142,7 @@ public class Post extends Comment {
                         System.out.println("\u001B[31m Invalid input \u001B[0m: Please enter a valid number");
                     break;
             }
-            sleep(200);
+            sleep(500);
         }
     }
 

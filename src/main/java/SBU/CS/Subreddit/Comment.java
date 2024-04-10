@@ -33,19 +33,20 @@ public class Comment implements Serializable {
         timePublished = LocalDateTime.now(); // for sorting user's timeline based on time
     }
 
+
     public int getKarma() {
-        return upVoters.size() - downVoters.size();
+        return (upVoters.size() - downVoters.size());
     }
 
     public void displayBrief() {
         System.out.println("u/" + publisher.getUsername() + " - " + Tools.calculateTimePassed(timePublished));
-        System.out.println("## " + this.text);
+        System.out.println("Comment: " + this.text);
         System.out.println("Karma: " + getKarma());
     }
 
-    public void displayComplete(User user) throws InterruptedException {
+    public void displayComplete(User user) {
         System.out.printf("u/%s - %d/%d/%d at %d:%d\n", publisher.getUsername(), timePublished.getYear(), timePublished.getMonthValue(), timePublished.getDayOfMonth(), timePublished.getHour(), timePublished.getMinute());
-        System.out.println("## " + this.text);
+        System.out.println("Comment: " + this.text);
         System.out.println("Karma: " + getKarma());
 
     }
@@ -60,7 +61,7 @@ public class Comment implements Serializable {
             displayComplete(user);
             hasUpVoted = this.upVoters.contains(user);
             hasDownVoted = this.downVoters.contains(user);
-            System.out.println("\n0. Exit\n1. " + Tools.RED_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.PURPLE_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Reply\n4. View Replies" + (getPublisher() == user ? "\n5. Edit Comment" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
+            System.out.println("\n0. Exit\n1. " + Tools.GREEN_COLOR + (hasUpVoted ? "Retract Vote" : "Upvote") + Tools.RESET_COLOR + "\n2. " + Tools.RED_COLOR + (hasDownVoted ? "Retract Vote" : "Downvote") + Tools.RESET_COLOR + "\n3. Reply\n4. View Replies" + (getPublisher() == user ? "\n5. Edit Comment" : "") + (getSubreddit().getAdmins().contains(user) ? "\n6. Admin Actions" : ""));
             if (hasUpVoted) {
                 System.out.println("(You have up-voted this comment)");
             } else if (hasDownVoted) {
@@ -77,7 +78,7 @@ public class Comment implements Serializable {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.upVoters.add(user);
-                        user.getUpVotedComments().add(this);
+                        user.getUpVotedComments().addFirst(this);
                         getPublisher().getNotifications().addFirst(new Notification("Comment up-voted", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was up-voted"));
                         System.out.println("Up-voted successfully");
                     }
@@ -98,7 +99,7 @@ public class Comment implements Serializable {
                         System.out.println("You have been banned from this subreddit and you can't post or comment in it");
                     } else {
                         System.out.println("Enter your comment:");
-                        getComments().add(new Comment(scanner.nextLine(), user, getSubreddit(), (Post) this));
+                        getComments().add(new Comment(scanner.nextLine(), user, getSubreddit(), this.post));
                     }
                     break;
                 case 4:

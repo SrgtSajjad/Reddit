@@ -21,6 +21,9 @@ public class User extends Account {
     private ArrayList<Subreddit> joinedSubreddits = new ArrayList<>(); // user's subreddits
     private ArrayList<Notification> notifications = new ArrayList<>(); // user's notification inbox
     private ArrayList<Post> savedPosts = new ArrayList<>();
+    private ArrayList<User> followers = new ArrayList<>();
+    private ArrayList<User> followings = new ArrayList<>();
+
 
     public User(String username, String password, String firstName, String lastName, LocalDate birthday, String email) {
         super(username, password, firstName, lastName, birthday, email);
@@ -77,6 +80,10 @@ public class User extends Account {
         return notifications;
     }
 
+    public ArrayList<Post> getSavedPosts() {
+        return savedPosts;
+    }
+
     public void displayMyProfile() throws InterruptedException { // display user's profile panel
         int i;
         boolean flag = true;
@@ -84,7 +91,7 @@ public class User extends Account {
             Tools.clearScreen();
             System.out.println(Tools.BLUE_COLOR + "~~| My Profile |~~" + Tools.RESET_COLOR);
             System.out.println("### " + getUsername());
-            System.out.printf("u/%s - %d karma - %s %d, %d\n", getUsername(), getTotalKarma(), getTimeCreated().getMonth(), getTimeCreated().getDayOfMonth(), getTimeCreated().getYear());
+            System.out.printf("u/%s - %d karma - %d Followers - %d Followings - %s %d, %d\n", getUsername(), getTotalKarma(), followers.size(), followings.size(), getTimeCreated().getMonth(), getTimeCreated().getDayOfMonth(), getTimeCreated().getYear());
 
             System.out.println("""
                                         
@@ -92,7 +99,11 @@ public class User extends Account {
                     1. Edit Profile
                     2. My Posts
                     3. My Comments
-                    4. About
+                    4. Upvoted Posts and Comments
+                    5. Saved Posts
+                    6. Followers
+                    7. Followings
+                    8. About
                     """);
             int command = Tools.handleErrors("an option", 0, 4);
             switch (command) {
@@ -104,6 +115,7 @@ public class User extends Account {
                     break;
                 case 2:
                     i = 0;
+                    System.out.println(Tools.BLUE_COLOR + "~~| My Posts |~~" + Tools.RESET_COLOR);
                     System.out.println("0. Exit");
                     for (Post post : posts) {
                         i++;
@@ -116,6 +128,7 @@ public class User extends Account {
                     break;
                 case 3:
                     i = 0;
+                    System.out.println(Tools.BLUE_COLOR + "~~| My Comments |~~" + Tools.RESET_COLOR);
                     System.out.println("0. Exit");
                     for (Comment comment : comments) {
                         i++;
@@ -127,10 +140,81 @@ public class User extends Account {
                         comments.get(command - 1).viewUserActions(this);
                     break;
                 case 4:
+                    System.out.println("0. Exit\n1. Upvoted Posts\n2. Upvoted Comments");
+                    command = Tools.handleErrors("an option", 0, 2);
+                    switch (command) {
+                        case 0:
+                            break;
+                        case 1:
+                            i = 0;
+                            System.out.println(Tools.BLUE_COLOR + "~~| Upvoted Posts |~~" + Tools.RESET_COLOR);
+                            System.out.println("0. Exit");
+                            for (Post post : upVotedPosts) {
+                                i++;
+                                System.out.println(i + ". ");
+                                post.displayBrief();
+                            }
+                            command = Tools.handleErrors("an option", 0, upVotedPosts.size());
+                            if (command != 0)
+                                upVotedPosts.get(command - 1).viewUserActions(this);
+                            break;
+                        case 2:
+                            i = 0;
+                            System.out.println(Tools.BLUE_COLOR + "~~| Upvoted Comments |~~" + Tools.RESET_COLOR);
+                            System.out.println("0. Exit");
+                            for (Comment comment : upVotedComments) {
+                                i++;
+                                System.out.println(i + ". ");
+                                comment.displayBrief();
+                            }
+                            command = Tools.handleErrors("an option", 0, upVotedComments.size());
+                            if (command != 0)
+                                upVotedComments.get(command - 1).viewUserActions(this);
+                            break;
+                    }
+                    break;
+                case 5:
+                    i = 0;
+                    System.out.println(Tools.BLUE_COLOR + "~~| Saved Posts |~~" + Tools.RESET_COLOR);
+                    System.out.println("0. Exit");
+                    for (Post post : savedPosts) {
+                        i++;
+                        System.out.println(i + ". ");
+                        post.displayBrief();
+                    }
+                    command = Tools.handleErrors("an option", 0, savedPosts.size());
+                    if (command != 0)
+                        savedPosts.get(command - 1).viewUserActions(this);
+                    break;
+                case 6:
+                    i = 0;
+                    System.out.println(Tools.BLUE_COLOR + "~~| Followers |~~" + Tools.RESET_COLOR);
+                    System.out.println("0. Exit");
+                    for (User user : followers) {
+                        i++;
+                        System.out.printf("%d. u/%s\n", i, user.getUsername());
+                    }
+                    command = Tools.handleErrors("an option", 0, followers.size());
+                    if (command != 0)
+                        followers.get(command - 1).followOptions(this);
+                    break;
+                case 7:
+                    i = 0;
+                    System.out.println(Tools.BLUE_COLOR + "~~| Followings |~~" + Tools.RESET_COLOR);
+                    System.out.println("0. Exit");
+                    for (User user : followings) {
+                        i++;
+                        System.out.printf("%d. u/%s\n", i, user.getUsername());
+                    }
+                    command = Tools.handleErrors("an option", 0, followings.size());
+                    if (command != 0)
+                        followings.get(command - 1).followOptions(this);
+                    break;
+                case 8:
                     System.out.printf("Post karma: %d | Comment karma: %d \n", getPostKarma(), getCommentKarma());
                     break;
             }
-            sleep(200);
+            sleep(500);
         }
     }
 
@@ -284,33 +368,42 @@ public class User extends Account {
     }
 
     private void displayTimeline() throws InterruptedException { // displays user's timeline from followed subreddits
+
+        //ToDo allow sortimg with karma
         Tools.clearScreen();
         System.out.println(Tools.BLUE_COLOR + "~~| Timeline |~~" + Tools.RESET_COLOR);
-        ArrayList<Post> timeline = new ArrayList<>();
-        for (Subreddit subreddit : joinedSubreddits) {
-            timeline.addAll(subreddit.getPosts());
-        }
-
+        ArrayList<Post> timeline = getTimeline();
         timeline.sort(Comparator.comparing(Post::getTimePublished)); // sort timeline according to post times
 
-        int i;
         while (true) {
             Tools.clearScreen();
             System.out.println("~~| Timeline |~~");
-            i = 0;
+
             System.out.println("0. Exit");
-            for (Post post : timeline) {
-                i++;
-                System.out.println(i + ". ");
-                post.displayBrief();
+            for (int i = timeline.size() - 1; i >= 0; i--) {
+
+                System.out.println(timeline.size() - i + ". ");
+                timeline.get(i).displayBrief();
             }
             int input = Tools.handleErrors("a post", 0, timeline.size());
             if (input == 0) {
                 break;
             }
-            timeline.get(input - 1).viewUserActions(this);
+            timeline.get(timeline.size() - input).viewUserActions(this);
         }
 
+    }
+
+    public ArrayList<Post> getTimeline() {
+        ArrayList<Post> timeline = new ArrayList<>();
+        for (Subreddit subreddit : joinedSubreddits) {
+            timeline.addAll(subreddit.getPosts());
+        }
+
+        for (User user : followings) {
+            timeline = Tools.mergeLists(timeline, user.getTimeline());
+        }
+        return timeline;
     }
 
     private void displayJoinedSubreddits() throws InterruptedException {
@@ -333,7 +426,7 @@ public class User extends Account {
         }
     }
 
-    private void searchDatabase() {
+    private void searchDatabase() throws InterruptedException {
         String searchPrompt;
 
         while (true) {
@@ -364,7 +457,7 @@ public class User extends Account {
         }
     }
 
-    private void displaySearchResults(String prompt) {
+    private void displaySearchResults(String prompt) throws InterruptedException {
         int i, command;
         ArrayList<Subreddit> subredditResults = new ArrayList<>();
         ArrayList<User> userResults = new ArrayList<>();
@@ -400,16 +493,20 @@ public class User extends Account {
             System.out.printf("Results for %s: \n", prompt);
             System.out.println("0. Exit");
             i = 0;
-            System.out.println("Communities: ");
+            if (subredditResults.isEmpty() && !userResults.isEmpty())
+                System.out.println("No result found, please change your search prompt");
+            if (!subredditResults.isEmpty())
+                System.out.println(Tools.CYAN_COLOR + "Communities: " + Tools.RESET_COLOR);
             for (Subreddit subreddit : subredditResults) {
                 i++;
                 System.out.println(i + ". ");
                 subreddit.displayBrief();
             }
-            System.out.println("Users: ");
+            if (!userResults.isEmpty())
+                System.out.println(Tools.CYAN_COLOR + "Users: " + Tools.RESET_COLOR);
             for (User user : userResults) {
                 i++;
-                System.out.println(i + ". u/" + user.getUsername());
+                System.out.println(i + ". u/" + user.getUsername() + " " + user.followers.size() + " Followers");
                 // ToDo needs change after addition of following users
             }
 
@@ -417,12 +514,56 @@ public class User extends Account {
             if (command == 0)
                 break;
             if (command > subredditResults.size()) {
-                System.out.println("Selecting users is currently unavailable :)");
+                command -= subredditResults.size();
+                userResults.get(command - 1).followOptions(this);
             } else {
-                subredditResults.get(command - 1).displayComplete();
+                subredditResults.get(command - 1).viewUserActions(this);
             }
         }
 
+    }
+
+    public void followOptions(User sentUser) throws InterruptedException {
+        boolean hasFollowed, isFollowed;
+        int command, i;
+
+        while (true) {
+            Tools.clearScreen();
+            isFollowed = this.followings.contains(sentUser);
+            hasFollowed = sentUser.followings.contains(this);
+            System.out.printf("/u%s - %d Followers - Created %s ago\n", this.getUsername(), this.followers.size(), Tools.calculateTimePassed(getTimeCreated()));
+            if (isFollowed)
+                System.out.println("(Follows you)");
+            System.out.println("\n0. Exit\n" + (hasFollowed ? "1. Un-Follow User" : (sentUser == this ? "You are this user!" : "1. Follow User")) + (isFollowed ? "2. Remove from followers" : ""));
+            command = Tools.handleErrors("an option", 0, 2);
+            switch (command) {
+                case 0: // exit
+                    return;
+                case 1:
+                    if (sentUser == this)
+                        System.out.println("Invalid input, please choose an available option");
+                    else if (hasFollowed) {
+                        this.followers.remove(sentUser);
+                        sentUser.followings.remove(this);
+                        System.out.println("User un-followed successfully");
+                    } else {
+                        this.followers.add(sentUser);
+                        sentUser.followings.add(this);
+                        System.out.println("User followed successfully");
+                    }
+                    break;
+                case 2:
+                    if (!isFollowed)
+                        System.out.println("Invalid input, please choose an available option");
+                    else {
+                        this.followings.remove(sentUser);
+                        sentUser.followers.remove(this);
+                        System.out.println("User removed from followers successfully");
+                    }
+                    break;
+            }
+            sleep(500);
+        }
     }
 
     private void displayInbox() {

@@ -1,7 +1,11 @@
 package SBU.CS;
 
+import SBU.CS.Subreddit.Post;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,5 +133,12 @@ public class Tools {
 
 
         return LocalDate.of(year, month, day);
+    }
+
+    public static ArrayList<Post> mergeLists(ArrayList<Post> mainTimeline, ArrayList<Post> secondTimeline) {
+
+        HashSet<Post> set = new HashSet<>(mainTimeline);
+        set.addAll(secondTimeline);
+        return new ArrayList<>(set);
     }
 }
