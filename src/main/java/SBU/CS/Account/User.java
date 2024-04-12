@@ -507,7 +507,7 @@ public class User extends Account {
             for (User user : userResults) {
                 i++;
                 System.out.println(i + ". u/" + user.getUsername() + " " + user.followers.size() + " Followers");
-                // ToDo needs change after addition of following users
+
             }
 
             command = Tools.handleErrors("an option", 0, subredditResults.size() + userResults.size());
@@ -595,8 +595,7 @@ public class User extends Account {
                     5. Communities
                     6. Search
                     7. Inbox""");
-            // ToDo messaging and save posts and following users
-            // ToDO allow user to see upvoted posts or comments
+
             int command = Tools.handleErrors("an option", 0, 7);
             switch (command) {
                 case 0:

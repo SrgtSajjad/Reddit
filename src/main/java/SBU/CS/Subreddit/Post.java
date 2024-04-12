@@ -89,6 +89,7 @@ public class Post extends Comment {
                     } else {
                         this.downVoters.add(user);
                         this.upVoters.remove(user);
+                        user.getUpVotedPosts().remove(this);
                         getPublisher().getNotifications().addFirst(new Notification("Post down-voted", "Your post in the subreddit: " + getSubreddit().getTitle() + " with title: " + title + ", was down-voted"));
                         System.out.println("Down-voted successfully");
                     }

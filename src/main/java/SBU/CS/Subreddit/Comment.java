@@ -78,6 +78,7 @@ public class Comment implements Serializable {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.upVoters.add(user);
+                        this.downVoters.remove(user);
                         user.getUpVotedComments().addFirst(this);
                         getPublisher().getNotifications().addFirst(new Notification("Comment up-voted", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was up-voted"));
                         System.out.println("Up-voted successfully");
@@ -89,6 +90,8 @@ public class Comment implements Serializable {
                         System.out.println("Vote removed successfully");
                     } else {
                         this.downVoters.add(user);
+                        this.upVoters.remove(user);
+                        user.getUpVotedComments().remove(this);
                         getPublisher().getNotifications().addFirst(new Notification("Comment down-voted", "Your comment in the subreddit: " + getSubreddit().getTitle() + " for post with title: " + post.getTitle() + ", was down-voted"));
                         System.out.println("Down-voted successfully");
                     }

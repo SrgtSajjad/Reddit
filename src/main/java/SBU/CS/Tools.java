@@ -76,7 +76,7 @@ public class Tools {
         return matcher.find();
     }
 
-    public static String calculateTimePassed(LocalDateTime timePublished) { //TODO bug
+    public static String calculateTimePassed(LocalDateTime timePublished) {
         LocalDateTime currentTime = LocalDateTime.now();
         String timePassed;
 
