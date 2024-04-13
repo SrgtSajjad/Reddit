@@ -19,7 +19,7 @@ In addition to voting, users can engage in discussions by commenting on posts, a
 2. Run the project
 3. Enter inputs as asked
 4. The rest of the application is self explanatory
-!Attension! Make sure to exit the project correctly to save information 
+* Attension! Make sure to exit the project correctly to save information 
 ### Demos
 1. <img src="./Menu.png" alt="Image">
 2. <img src="./User%20Panel.png" alt="Image">
