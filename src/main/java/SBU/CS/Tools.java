@@ -35,9 +35,12 @@ public class Tools {
     }
 
     public static void clearScreen() { // create the illusion of a cleared terminal by printing empty lines
-        for (int i = 0; i < 50; i++) {
+        System.out.println("-------------------");
+        for (int i = 0; i < 8; i++) {
             System.out.println();
         }
+        System.out.println("-------------------");
+
     }
 
     public static int handleErrors(String inputTitle, int firstValue, int lastValue) { // for handling exceptions in getting input

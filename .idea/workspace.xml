@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="implement following users" />
+    <list default="true" id="05833257-245c-4ff2-a0b5-edaf981b29bf" name="Changes" comment="minor bugs fixed">
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SBU/CS/Account/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,17 +92,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Reddit [:Main.main()].executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Reddit [:Main.main()].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "D:/SBU Projects/Term 2/AP/Reddit/src/main/java/org/example/Main.java",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Markdown",
+      "PLAIN_TEXT"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="SBU.CS.Tools" />
@@ -119,14 +129,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1711177496980</updated>
-    </task>
-    <task id="LOCAL-00001" summary="initial commit">
-      <option name="closed" value="true" />
-      <created>1711177648510</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1711177648510</updated>
     </task>
     <task id="LOCAL-00002" summary="Create Account class">
       <option name="closed" value="true" />
@@ -512,7 +514,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712711152191</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="minor bugs fixed">
+      <option name="closed" value="true" />
+      <created>1712932321986</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1712932321987</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -533,7 +543,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Display complete methods updated" />
     <MESSAGE value="getter and setters updated in User class" />
     <MESSAGE value="Subreddit field attributes updated" />
     <MESSAGE value="Getter and setters updated in Account class" />
@@ -558,7 +567,8 @@
     <MESSAGE value="allow replying to comments" />
     <MESSAGE value="apply error colors" />
     <MESSAGE value="implement following users" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement following users" />
+    <MESSAGE value="minor bugs fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor bugs fixed" />
   </component>
   <component name="WfRunsListSearchHistory"><![CDATA[{
   "history": [
@@ -660,6 +670,14 @@
     {
       "branch": "develop",
       "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
+    },
+    {
+      "branch": "develop",
+      "currentBranchFilter": true
     }
   ],
   "lastFilter": {
@@ -677,10 +695,5 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="SBU.CS.Subreddit.Subreddit" memberName="admins" />
-      </pinned-members>
-    </pin-to-top-manager>
   </component>
 </project>

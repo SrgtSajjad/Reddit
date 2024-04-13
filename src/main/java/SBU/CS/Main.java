@@ -43,8 +43,10 @@ public class Main {
         while (true) {
             System.out.print("Username/Email: ");
             input = scanner.nextLine();
-            if (Tools.stringIsValid(input) || Tools.validateEmailFormat(input))
+            if (Tools.stringIsValid(input) || Tools.validateEmailFormat(input) || input.equals("exit"))
                 break;
+            System.out.println("\u001B[31m Invalid input \u001B[0m: User with this username/email was not found, please check your credentials and try again\n(type \"exit\" to leave to the main menu)[");
+
         }
 
         for (User user : Database.users) {

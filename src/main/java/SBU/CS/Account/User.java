@@ -405,7 +405,7 @@ public class User extends Account {
         }
 
         for (User user : followings) {
-            timeline = Tools.mergeLists(timeline, user.getTimeline(sort));
+            timeline = Tools.mergeLists(timeline, user.getPosts());
         }
         if (sort == 1) {
             timeline.sort(Comparator.comparing(Post::getTimePublished).reversed()); // sort timeline according to post time published
@@ -445,6 +445,11 @@ public class User extends Account {
         while (true) {
             Tools.clearScreen();
             System.out.println(Tools.BLUE_COLOR + "~~| Search |~~" + Tools.RESET_COLOR);
+            System.out.println("Recommended communities: ");
+            for (Subreddit subreddit : Database.subreddits) {
+                System.out.println("----");
+                subreddit.displayBrief();
+            }
 
             searchPrompt = getSearchPrompt();
             if (searchPrompt.equals("exit"))
