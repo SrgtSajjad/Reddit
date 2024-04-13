@@ -368,22 +368,26 @@ public class User extends Account {
     }
 
     private void displayTimeline() throws InterruptedException { // displays user's timeline from followed subreddits
-
-        //ToDo allow sortimg with karma
         Tools.clearScreen();
         System.out.println(Tools.BLUE_COLOR + "~~| Timeline |~~" + Tools.RESET_COLOR);
-        ArrayList<Post> timeline = getTimeline();
-        timeline.sort(Comparator.comparing(Post::getTimePublished)); // sort timeline according to post times
+        System.out.println("""
+                Sort according to:
+                1. Time Published
+                2. Trending (higher karma)
+                """);
+        int sort = Tools.handleErrors("an option", 1, 2);
+        ArrayList<Post> timeline = getTimeline(sort);
 
         while (true) {
             Tools.clearScreen();
             System.out.println("~~| Timeline |~~");
 
             System.out.println("0. Exit");
-            for (int i = timeline.size() - 1; i >= 0; i--) {
-
-                System.out.println(timeline.size() - i + ". ");
-                timeline.get(i).displayBrief();
+            int i = 0;
+            for (Post post : timeline) {
+                i++;
+                System.out.println(i + ". ");
+                post.displayBrief();
             }
             int input = Tools.handleErrors("a post", 0, timeline.size());
             if (input == 0) {
@@ -394,15 +398,24 @@ public class User extends Account {
 
     }
 
-    public ArrayList<Post> getTimeline() {
+    public ArrayList<Post> getTimeline(int sort) {
         ArrayList<Post> timeline = new ArrayList<>();
         for (Subreddit subreddit : joinedSubreddits) {
             timeline.addAll(subreddit.getPosts());
         }
 
         for (User user : followings) {
-            timeline = Tools.mergeLists(timeline, user.getTimeline());
+            timeline = Tools.mergeLists(timeline, user.getTimeline(sort));
         }
+        if (sort == 1) {
+            timeline.sort(Comparator.comparing(Post::getTimePublished).reversed()); // sort timeline according to post time published
+        }
+
+        else if (sort == 2) {
+            timeline.sort(Comparator.comparing(Post::getKarma).reversed()); // sort timeline according to post karma
+
+        }
+
         return timeline;
     }
 
