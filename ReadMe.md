@@ -15,7 +15,7 @@ Users can upvote content they find interesting or valuable, which increases its 
 In addition to voting, users can engage in discussions by commenting on posts, and they can also share their own content or contribute to ongoing conversations. Reddit fosters a sense of community through its discussion threads, allowing users to interact with each other, ask questions, share advice, and engage in debates.
 
 ### Usage
-1. Clone the project from [*GitHub*](https://github.com/SrgtSajjad/AP-Third-Assignment-Hogwarts.git)
+1. Clone the project from [*GitHub*](https://github.com/SrgtSajjad/Reddit.git)
 2. 
 ### Demos
 1. <img src="./Menu.png" alt="Image">
